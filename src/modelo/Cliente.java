@@ -1,24 +1,28 @@
 package modelo;
 
-public class Cliente extends Usuario {
-
+public class Cliente {
+    private int idCliente;
     private String direccion;
     private String telefono;
+    private int idUsuario;
 
-    // Constructor vacío
-    public Cliente() {
-        super();
-        this.rol = Rol.CLIENTE;
-    }
+    public Cliente() {}
 
-    // Constructor completo
-    public Cliente(int idUsuario, String nombre, String correo, String contrasena, String direccion, String telefono) {
-        super(idUsuario, nombre, correo, contrasena, Rol.CLIENTE);
+    public Cliente(int idCliente, String direccion, String telefono, int idUsuario) {
+        this.idCliente = idCliente;
         this.direccion = direccion;
         this.telefono = telefono;
+        this.idUsuario = idUsuario;
     }
 
-    // Getters y Setters
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
     public String getDireccion() {
         return direccion;
     }
@@ -35,9 +39,11 @@ public class Cliente extends Usuario {
         this.telefono = telefono;
     }
 
-    // toString personalizado
-    @Override
-    public String toString() {
-        return super.toString() + " - " + direccion + " | " + telefono;
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }

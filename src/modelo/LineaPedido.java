@@ -1,30 +1,34 @@
 package modelo;
 
-import java.util.Objects;
-
 public class LineaPedido {
-
-    private Producto producto;
+    private int idPedido;
+    private int idProducto;
     private int cantidad;
     private double precioUnitario;
 
-    // Constructor vacío
     public LineaPedido() {}
 
-    // Constructor completo
-    public LineaPedido(Producto producto, int cantidad, double precioUnitario) {
-        this.producto = producto;
+    public LineaPedido(int idPedido, int idProducto, int cantidad, double precioUnitario) {
+        this.idPedido = idPedido;
+        this.idProducto = idProducto;
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
     }
 
-    // Getters y setters
-    public Producto getProducto() {
-        return producto;
+    public int getIdPedido() {
+        return idPedido;
     }
 
-    public void setProducto(Producto producto) {
-        this.producto = producto;
+    public void setIdPedido(int idPedido) {
+        this.idPedido = idPedido;
+    }
+
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
     public int getCantidad() {
@@ -41,28 +45,5 @@ public class LineaPedido {
 
     public void setPrecioUnitario(double precioUnitario) {
         this.precioUnitario = precioUnitario;
-    }
-
-    // Subtotal calculado automáticamente
-    public double getSubtotal() {
-        return cantidad * precioUnitario;
-    }
-
-    @Override
-    public String toString() {
-        return producto.getNombre() + " x" + cantidad + " = " + getSubtotal() + " €";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof LineaPedido)) return false;
-        LineaPedido that = (LineaPedido) o;
-        return Objects.equals(producto, that.producto);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(producto);
     }
 }

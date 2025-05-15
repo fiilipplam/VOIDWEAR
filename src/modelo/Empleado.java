@@ -1,21 +1,29 @@
 package modelo;
 
-public class Empleado extends Usuario {
+public class Empleado {
+    private int idEmpleado;
+    private int idUsuario;
 
-    // Constructor vacío
-    public Empleado() {
-        super();
-        this.rol = Rol.EMPLEADO;
+    public Empleado() {}
+
+    public Empleado(int idEmpleado, int idUsuario) {
+        this.idEmpleado = idEmpleado;
+        this.idUsuario = idUsuario;
     }
 
-    // Constructor completo
-    public Empleado(int idUsuario, String nombre, String correo, String contrasena) {
-        super(idUsuario, nombre, correo, contrasena, Rol.EMPLEADO);
+    public int getIdEmpleado() {
+        return idEmpleado;
     }
 
-    // toString personalizado
-    @Override
-    public String toString() {
-        return super.toString() + " (Empleado)";
+    public void setIdEmpleado(int idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }

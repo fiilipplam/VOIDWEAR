@@ -1,21 +1,29 @@
 package modelo;
 
-public class Gestor extends Usuario {
+public class Gestor {
+    private int idGestor;
+    private int idUsuario;
 
-    // Constructor vacío
-    public Gestor() {
-        super();
-        this.rol = Rol.GESTOR;
+    public Gestor() {}
+
+    public Gestor(int idGestor, int idUsuario) {
+        this.idGestor = idGestor;
+        this.idUsuario = idUsuario;
     }
 
-    // Constructor completo
-    public Gestor(int idUsuario, String nombre, String correo, String contrasena) {
-        super(idUsuario, nombre, correo, contrasena, Rol.GESTOR);
+    public int getIdGestor() {
+        return idGestor;
     }
 
-    // toString personalizado
-    @Override
-    public String toString() {
-        return super.toString() + " (Gestor)";
+    public void setIdGestor(int idGestor) {
+        this.idGestor = idGestor;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }

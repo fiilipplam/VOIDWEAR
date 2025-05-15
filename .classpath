@@ -8,5 +8,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/mysql-connector-j-9.2.0.jar"/>
 	<classpathentry kind="lib" path="lib/objectdb-2.9.2.jar"/>
+	<classpathentry kind="lib" path="lib/javax.persistence-api-2.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
