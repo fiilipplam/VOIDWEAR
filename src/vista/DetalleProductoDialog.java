@@ -10,6 +10,7 @@ import java.io.File;
 
 public class DetalleProductoDialog extends JDialog {
     private Producto producto;
+    private boolean cambiosGuardados = false;
     private boolean actualizado = false;
 
     private JTextField campoNombre;
@@ -95,15 +96,14 @@ public class DetalleProductoDialog extends JDialog {
 
         add(panelCentral, BorderLayout.CENTER);
 
-        // Botones inferiores
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton botonGuardar = new JButton("Guardar");
         JButton botonCancelar = new JButton("Cancelar");
         panelBotones.add(botonCancelar);
         panelBotones.add(botonGuardar);
+        panelBotones.add(botonCambiarImagen);
         add(panelBotones, BorderLayout.SOUTH);
 
-        // Listeners
         botonCambiarImagen.addActionListener(e -> cambiarImagen());
         botonCancelar.addActionListener(e -> dispose());
         botonGuardar.addActionListener(this::guardarCambios);
@@ -115,14 +115,24 @@ public class DetalleProductoDialog extends JDialog {
     }
 
     private void cambiarImagen() {
-        JFileChooser fileChooser = new JFileChooser("imagenes/");
-        int resultado = fileChooser.showOpenDialog(this);
+        JFileChooser selector = new JFileChooser("recursos/imagenes/productos");
+        selector.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int resultado = selector.showOpenDialog(this);
         if (resultado == JFileChooser.APPROVE_OPTION) {
-            File archivoSeleccionado = fileChooser.getSelectedFile();
-            rutaImagen = "imagenes/" + archivoSeleccionado.getName();
-            cargarImagen(rutaImagen);
+            File archivo = selector.getSelectedFile();
+            String rutaAbsoluta = archivo.getAbsolutePath().replace("\\", "/");
+            int index = rutaAbsoluta.indexOf("recursos/");
+            if (index != -1) {
+                rutaImagen = rutaAbsoluta.substring(index);
+                etiquetaImagen.setText(archivo.getName());
+                cargarImagen(rutaImagen);
+            } else {
+                JOptionPane.showMessageDialog(this, "La imagen debe estar en la carpeta recursos/imagenes/productos");
+                rutaImagen = null;
+            }
         }
     }
+
 
     private void guardarCambios(ActionEvent e) {
         try {
@@ -133,15 +143,15 @@ public class DetalleProductoDialog extends JDialog {
             producto.setColor(campoColor.getText());
             producto.setStock(Integer.parseInt(campoStock.getText()));
             producto.setImagen(rutaImagen);
-            actualizado = true;
+            cambiosGuardados = true;
             dispose();
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Error en los datos numéricos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    public boolean isActualizado() {
-        return actualizado;
+    public boolean seGuardaronCambios() {
+        return cambiosGuardados;
     }
 
     public Producto getProductoActualizado() {

@@ -74,4 +74,10 @@ public class ProductoTableModel extends AbstractTableModel {
         productos.add(producto);
         fireTableRowsInserted(productos.size() - 1, productos.size() - 1);
     }
+    
+    public void eliminarProducto(int fila) {
+        productos.remove(fila);
+        fireTableRowsDeleted(fila, fila);
+    }
+
 }

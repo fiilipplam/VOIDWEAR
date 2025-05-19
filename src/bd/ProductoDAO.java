@@ -55,7 +55,6 @@ public class ProductoDAO {
 
     public void eliminarProducto(int idProducto) {
         String sql = "DELETE FROM producto WHERE id_producto=?";
-
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
             ps.setInt(1, idProducto);
             ps.executeUpdate();
@@ -63,6 +62,7 @@ public class ProductoDAO {
             e.printStackTrace();
         }
     }
+
 
     public List<Producto> listarProductos() {
         List<Producto> productos = new ArrayList<>();

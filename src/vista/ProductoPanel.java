@@ -104,5 +104,45 @@ public class ProductoPanel extends JPanel {
             botonEditar.setEnabled(false);
             botonEliminar.setEnabled(false);
         }
+        
+        botonEditar.addActionListener(e -> {
+            int fila = tabla.getSelectedRow();
+            if (fila >= 0) {
+                int modeloFila = tabla.convertRowIndexToModel(fila);
+                Producto producto = tableModel.getProductoAt(modeloFila);
+
+                DetalleProductoDialog dialogo = new DetalleProductoDialog(null, producto);
+                dialogo.setVisible(true);
+
+                if (dialogo.seGuardaronCambios()) {
+                    ProductoDAO dao = new ProductoDAO(ConexionBD.getConexion());
+                    dao.actualizarProducto(producto);
+                    tableModel.fireTableRowsUpdated(modeloFila, modeloFila);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Seleccione un producto para editar.");
+            }
+        });
+        
+        botonEliminar.addActionListener(e -> {
+            int fila = tabla.getSelectedRow();
+            if (fila >= 0) {
+                int modeloFila = tabla.convertRowIndexToModel(fila);
+                Producto producto = tableModel.getProductoAt(modeloFila);
+
+                int confirmacion = JOptionPane.showConfirmDialog(this,
+                    "¿Estás seguro de que deseas eliminar este producto?",
+                    "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+                if (confirmacion == JOptionPane.YES_OPTION) {
+                    ProductoDAO dao = new ProductoDAO(ConexionBD.getConexion());
+                    dao.eliminarProducto(producto.getIdProducto());
+                    tableModel.eliminarProducto(modeloFila);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Seleccione un producto para eliminar.");
+            }
+        });
+
     }
 }
