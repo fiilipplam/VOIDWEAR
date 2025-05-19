@@ -3,21 +3,18 @@ package vista;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import javax.persistence.*;
 
 import bd.ConexionBD;
 import modelo.Usuario;
-import modelo.Rol;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class LoginFrame extends JFrame {
 
+    private static final long serialVersionUID = 1L;
     private JTextField txtCorreo;
     private JPasswordField txtContrasena;
 
@@ -28,107 +25,83 @@ public class LoginFrame extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        // Panel principal
         JPanel panel = new JPanel(new GridLayout(5, 1, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(30, 40, 30, 40));
 
         txtCorreo = new JTextField();
         txtContrasena = new JPasswordField();
 
-        JButton btnLogin = new JButton("Iniciar sesión");
-        JButton btnInvitado = new JButton("Acceder como invitado");
-
         panel.add(new JLabel("Correo electrónico:"));
         panel.add(txtCorreo);
         panel.add(new JLabel("Contraseña:"));
         panel.add(txtContrasena);
-        panel.add(btnLogin);
-        panel.add(btnInvitado);
+
+        JPanel botones = new JPanel(new GridLayout(1, 2, 10, 10));
+        JButton btnIniciarSesion = new JButton("Iniciar sesión");
+        JButton btnInvitado = new JButton("Acceder como invitado");
+        botones.add(btnIniciarSesion);
+        botones.add(btnInvitado);
+        panel.add(botones);
 
         add(panel, BorderLayout.CENTER);
 
-        // Acción del botón login
-        btnLogin.addActionListener((ActionEvent e) -> {
-            String correo = txtCorreo.getText().trim();
-            String contrasena = new String(txtContrasena.getPassword()).trim();
-
-            Usuario usuario = validarCredenciales(correo, contrasena);
-
-            if (usuario != null) {
-                registrarAcceso(usuario.getIdUsuario(), "Inicio de sesión exitoso");
-                abrirVentanaPrincipal(usuario);
-            } else {
-                JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        });
-
-        // Acción del botón invitado
-        btnInvitado.addActionListener((ActionEvent e) -> {
-            registrarAcceso(null, "Acceso como invitado");
-            abrirCatalogoComoInvitado();
-        });
+        btnIniciarSesion.addActionListener(this::autenticarUsuario);
+        btnInvitado.addActionListener(e -> abrirComoInvitado());
     }
 
-    /**
-     * Verifica si el usuario existe en ObjectDB y si la contraseña es correcta
-     */
-    private Usuario validarCredenciales(String correo, String contrasena) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("usuarios.odb");
+    private void autenticarUsuario(ActionEvent e) {
+        String correo = txtCorreo.getText().trim();
+        String contrasena = new String(txtContrasena.getPassword()).trim();
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("voidwearPU");
         EntityManager em = emf.createEntityManager();
 
         try {
-            TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.correo = :correo", Usuario.class);
+            TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.correo = :correo AND u.contrasena = :contrasena", Usuario.class);
             query.setParameter("correo", correo);
+            query.setParameter("contrasena", contrasena);
             List<Usuario> resultado = query.getResultList();
 
             if (!resultado.isEmpty()) {
                 Usuario usuario = resultado.get(0);
-                if (usuario.getContrasena().equals(contrasena)) {
-                    return usuario;
-                }
+                registrarAcceso(usuario.getId(), "Acceso exitoso");
+                JOptionPane.showMessageDialog(this, "Bienvenido, " + usuario.getNombre());
+
+                // Aquí deberías abrir el MainFrame según el rol
+                // Ejemplo: new MainFrame(usuario).setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error en la autenticación.", "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             em.close();
             emf.close();
         }
-        return null;
     }
 
-    /**
-     * Registra acceso en la tabla log de MySQL
-     */
+    private void abrirComoInvitado() {
+        registrarAcceso(null, "Acceso como invitado");
+        JOptionPane.showMessageDialog(this, "Has accedido como invitado.");
+        // Aquí abrirías la vista del catálogo como invitado
+        // new CatalogoInvitadoFrame().setVisible(true);
+        dispose();
+    }
+
     private void registrarAcceso(Integer idUsuario, String evento) {
         try (Connection conn = ConexionBD.getConexion()) {
-            String sql = "INSERT INTO log (id_usuario, evento, fecha_hora) VALUES (?, ?, NOW())";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO log (id_usuario, evento) VALUES (?, ?)");
             if (idUsuario != null) {
-                stmt.setInt(1, idUsuario);
+                ps.setInt(1, idUsuario);
             } else {
-                stmt.setNull(1, java.sql.Types.INTEGER);
+                ps.setNull(1, java.sql.Types.INTEGER);
             }
-
-            stmt.setString(2, evento);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            System.err.println("❌ Error al registrar en el log");
-            e.printStackTrace();
+            ps.setString(2, evento);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-    }
-
-    /**
-     * Lanza la ventana principal con el usuario autenticado
-     */
-    private void abrirVentanaPrincipal(Usuario usuario) {
-        this.dispose(); // Cierra ventana login
-        new MainFrame(usuario).setVisible(true); // Lanza MainFrame
-    }
-
-    /**
-     * Lanza el catálogo como invitado
-     */
-    private void abrirCatalogoComoInvitado() {
-        this.dispose();
-        new MainFrame(null).setVisible(true); // El MainFrame manejará si es null como invitado
     }
 }

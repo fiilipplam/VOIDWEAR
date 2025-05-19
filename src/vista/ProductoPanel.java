@@ -2,80 +2,92 @@ package vista;
 
 import modelo.Producto;
 import bd.ProductoDAO;
-import bd.ConexionBD;
+import util.ImageRenderer;
+import util.ImageUtils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.sql.Connection;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
-public class ProductoPanel extends JFrame {
+public class ProductoPanel extends JPanel {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1763535510459054923L;
-	private JTable tabla;
-    private DefaultTableModel modeloTabla;
-    private JButton btnCargar;
+    private JTable tabla;
+    private DefaultTableModel modelo;
+    private JTextField campoBuscar;
 
     public ProductoPanel() {
-        setTitle("Catálogo de Productos - VOIDWEAR");
-        setSize(800, 400);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
 
-        initComponents();
-    }
+        // Filtro de búsqueda
+        JPanel panelBusqueda = new JPanel();
+        panelBusqueda.add(new JLabel("Buscar:"));
+        campoBuscar = new JTextField(20);
+        panelBusqueda.add(campoBuscar);
+        JButton botonBuscar = new JButton("Buscar");
+        panelBusqueda.add(botonBuscar);
+        add(panelBusqueda, BorderLayout.NORTH);
 
-    private void initComponents() {
-        // Panel principal
-        JPanel panel = new JPanel(new BorderLayout());
+        // Tabla
+        String[] columnas = {"Nombre", "Precio", "Categoría", "Talla", "Color", "Stock", "Imagen"};
+        modelo = new DefaultTableModel(columnas, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Todas las celdas no editables
+            }
 
-        // Modelo de tabla
-        modeloTabla = new DefaultTableModel(new String[] {
-            "ID", "Nombre", "Precio", "Categoría", "Talla", "Color", "Stock", "Imagen"
-        }, 0);
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                if (columnIndex == 6) return ImageIcon.class;
+                return String.class;
+            }
+        };
 
-        tabla = new JTable(modeloTabla);
+        tabla = new JTable(modelo);
+        tabla.setRowHeight(50);
+        tabla.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer(60, 60));
+
         JScrollPane scroll = new JScrollPane(tabla);
-        panel.add(scroll, BorderLayout.CENTER);
+        add(scroll, BorderLayout.CENTER);
 
-        // Botón cargar
-        btnCargar = new JButton("Cargar productos");
-        btnCargar.addActionListener(e -> cargarProductos());
-        panel.add(btnCargar, BorderLayout.SOUTH);
+        // Cargar productos
+        cargarProductos();
 
-        add(panel);
+        // Doble clic en fila
+        tabla.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2 && tabla.getSelectedRow() != -1) {
+                    int fila = tabla.getSelectedRow();
+                    Producto producto = getProductoEnFila(fila);
+                    DetalleProductoDialog dialog = new DetalleProductoDialog(SwingUtilities.getWindowAncestor(ProductoPanel.this), producto);
+                    dialog.setVisible(true);
+                }
+            }
+        });
     }
 
     private void cargarProductos() {
-        Connection conn = ConexionBD.getConexion();
-        ProductoDAO dao = new ProductoDAO(conn);
-        List<Producto> lista = dao.obtenerTodos();
-
-        modeloTabla.setRowCount(0); // limpiar
-
-        for (Producto p : lista) {
-            modeloTabla.addRow(new Object[] {
-                p.getIdProducto(),
-                p.getNombre(),
-                p.getPrecio(),
-                p.getCategoria(),
-                p.getTalla(),
-                p.getColor(),
-                p.getStock(),
-                p.getImagen()
+        ProductoDAO dao = new ProductoDAO(null);
+        List<Producto> productos = dao.obtenerTodos();
+        for (Producto p : productos) {
+            modelo.addRow(new Object[]{
+                    p.getNombre(),
+                    String.valueOf(p.getPrecio()),
+                    p.getCategoria(),
+                    p.getTalla(),
+                    p.getColor(),
+                    String.valueOf(p.getStock()),
+                    ImageUtils.cargarMiniatura(p.getImagen(), 40, 40)
             });
         }
-
-        ConexionBD.cerrarConexion();
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new ProductoPanel().setVisible(true);
-        });
+    private Producto getProductoEnFila(int fila) {
+        String nombre = (String) modelo.getValueAt(fila, 0);
+        ProductoDAO dao = new ProductoDAO(null);
+        return dao.buscarPorNombre(nombre);
     }
 }
