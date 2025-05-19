@@ -13,14 +13,14 @@ public class ConexionBD {
 
     // Método para obtener la conexión
     public static Connection getConexion() {
-        if (conexion == null) {
-            try {
+        try {
+            if (conexion == null || conexion.isClosed()) {
                 conexion = DriverManager.getConnection(URL, USUARIO, CONTRASENA);
                 System.out.println("✅ Conexión establecida con la base de datos.");
-            } catch (SQLException e) {
-                System.err.println("❌ Error al conectar con la base de datos.");
-                e.printStackTrace();
             }
+        } catch (SQLException e) {
+            System.err.println("❌ Error al conectar con la base de datos.");
+            e.printStackTrace();
         }
         return conexion;
     }
@@ -30,9 +30,9 @@ public class ConexionBD {
         if (conexion != null) {
             try {
                 conexion.close();
-                conexion = null;
                 System.out.println("🔒 Conexión cerrada.");
             } catch (SQLException e) {
+                System.err.println("❌ Error al cerrar la conexión.");
                 e.printStackTrace();
             }
         }

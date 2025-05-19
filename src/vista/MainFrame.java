@@ -87,8 +87,9 @@ public class MainFrame extends JFrame {
         // Acciones de botones
         btnInicio.addActionListener(e -> mostrarPanel(new JPanel())); // PanelInicio
         btnProductos.addActionListener(e -> {
-        	List<Producto> productos = new ProductoDAO(null).obtenerTodos();
-            mostrarPanel(new PanelProductos(productos, usuario.getNombre()));
+            ProductoDAO dao = new ProductoDAO(bd.ConexionBD.getConexion()); // ✅ conexión válida
+            List<Producto> productos = dao.listarProductos();
+            mostrarPanel(new ProductoPanel(productos, usuario.getRol().toString()));
         });
 
         btnPedidos.addActionListener(e -> mostrarPanel(new JPanel())); // PanelPedidos

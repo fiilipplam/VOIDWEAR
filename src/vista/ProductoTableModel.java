@@ -1,19 +1,21 @@
 package vista;
 
 import modelo.Producto;
-import util.ImageUtils;
 
-import javax.swing.table.AbstractTableModel;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.table.AbstractTableModel;
+import java.util.List;
 
 public class ProductoTableModel extends AbstractTableModel {
     private final String[] columnas = {"Nombre", "Precio", "Categoría", "Talla", "Color", "Stock", "Imagen"};
     private List<Producto> productos;
 
-    public ProductoTableModel() {
-        this.productos = new ArrayList<>();
+    public ProductoTableModel(List<Producto> productos) {
+        this.productos = productos;
+    }
+
+    public Producto getProductoAt(int rowIndex) {
+        return productos.get(rowIndex);
     }
 
     public void setProductos(List<Producto> productos) {
@@ -21,8 +23,8 @@ public class ProductoTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    public Producto getProductoEnFila(int fila) {
-        return productos.get(fila);
+    public List<Producto> getProductos() {
+        return productos;
     }
 
     @Override
@@ -36,42 +38,40 @@ public class ProductoTableModel extends AbstractTableModel {
     }
 
     @Override
-    public String getColumnName(int col) {
-        return columnas[col];
+    public String getColumnName(int column) {
+        return columnas[column];
     }
 
     @Override
-    public Object getValueAt(int fila, int columna) {
-        Producto p = productos.get(fila);
-        return switch (columna) {
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        Producto p = productos.get(rowIndex);
+        return switch (columnIndex) {
             case 0 -> p.getNombre();
             case 1 -> p.getPrecio();
             case 2 -> p.getCategoria();
             case 3 -> p.getTalla();
             case 4 -> p.getColor();
             case 5 -> p.getStock();
-            case 6 -> {
-                String ruta = p.getImagen();
-                if (ruta != null && !ruta.isEmpty()) {
-                    yield ImageUtils.cargarMiniatura(ruta, 50, 50);
-                } else {
-                    yield null;
-                }
-            }
+            case 6 -> p.getImagen();
             default -> null;
         };
     }
 
     @Override
-    public Class<?> getColumnClass(int col) {
-        if (col == 6) {
-            return ImageIcon.class;
-        }
+    public Class<?> getColumnClass(int columnIndex) {
+        if (columnIndex == 1) return Double.class;
+        if (columnIndex == 5) return Integer.class;
+        if (columnIndex == 6) return ImageIcon.class;
         return String.class;
     }
 
-    @Override
-    public boolean isCellEditable(int row, int col) {
-        return false;
+    public void actualizarProducto(int fila, Producto productoActualizado) {
+        productos.set(fila, productoActualizado);
+        fireTableRowsUpdated(fila, fila);
+    }
+    
+    public void agregarProducto(Producto producto) {
+        productos.add(producto);
+        fireTableRowsInserted(productos.size() - 1, productos.size() - 1);
     }
 }

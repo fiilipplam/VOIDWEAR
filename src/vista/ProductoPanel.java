@@ -1,93 +1,108 @@
 package vista;
 
-import modelo.Producto;
+import bd.ConexionBD;
 import bd.ProductoDAO;
+import modelo.Producto;
 import util.ImageRenderer;
-import util.ImageUtils;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.sql.Connection;
 import java.util.List;
 
 public class ProductoPanel extends JPanel {
-
     private JTable tabla;
-    private DefaultTableModel modelo;
+    private ProductoTableModel tableModel;
     private JTextField campoBuscar;
+    private JComboBox<String> comboOrdenar;
+    private TableRowSorter<ProductoTableModel> sorter;
 
-    public ProductoPanel() {
+    private JButton botonAnadir;
+    private JButton botonEditar;
+    private JButton botonEliminar;
+    private JButton botonMostrarDetalles;
+
+    public ProductoPanel(List<Producto> productos, String rolUsuario) {
         setLayout(new BorderLayout());
 
-        // Filtro de búsqueda
-        JPanel panelBusqueda = new JPanel();
-        panelBusqueda.add(new JLabel("Buscar:"));
+        // Panel de filtros
+        JPanel panelSuperior = new JPanel(new FlowLayout(FlowLayout.LEFT));
         campoBuscar = new JTextField(20);
-        panelBusqueda.add(campoBuscar);
+        comboOrdenar = new JComboBox<>(new String[]{"Nombre", "Precio", "Categoría"});
         JButton botonBuscar = new JButton("Buscar");
-        panelBusqueda.add(botonBuscar);
-        add(panelBusqueda, BorderLayout.NORTH);
 
-        // Tabla
-        String[] columnas = {"Nombre", "Precio", "Categoría", "Talla", "Color", "Stock", "Imagen"};
-        modelo = new DefaultTableModel(columnas, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false; // Todas las celdas no editables
-            }
+        panelSuperior.add(new JLabel("Buscar:"));
+        panelSuperior.add(campoBuscar);
+        panelSuperior.add(botonBuscar);
+        panelSuperior.add(new JLabel("Ordenar por:"));
+        panelSuperior.add(comboOrdenar);
+        add(panelSuperior, BorderLayout.NORTH);
 
-            @Override
-            public Class<?> getColumnClass(int columnIndex) {
-                if (columnIndex == 6) return ImageIcon.class;
-                return String.class;
-            }
-        };
+        // Tabla de productos
+        tableModel = new ProductoTableModel(productos);
+        tabla = new JTable(tableModel);
+        tabla.setRowHeight(64);
+        tabla.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
 
-        tabla = new JTable(modelo);
-        tabla.setRowHeight(50);
-        tabla.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer(60, 60));
+        sorter = new TableRowSorter<>(tableModel);
+        tabla.setRowSorter(sorter);
 
-        JScrollPane scroll = new JScrollPane(tabla);
-        add(scroll, BorderLayout.CENTER);
+        add(new JScrollPane(tabla), BorderLayout.CENTER);
 
-        // Cargar productos
-        cargarProductos();
+        // Panel de botones
+        JPanel panelInferior = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        botonAnadir = new JButton("Añadir");
+        botonEditar = new JButton("Editar");
+        botonEliminar = new JButton("Eliminar");
+        botonMostrarDetalles = new JButton("Mostrar detalles");
 
-        // Doble clic en fila
-        tabla.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2 && tabla.getSelectedRow() != -1) {
-                    int fila = tabla.getSelectedRow();
-                    Producto producto = getProductoEnFila(fila);
-                    DetalleProductoDialog dialog = new DetalleProductoDialog(SwingUtilities.getWindowAncestor(ProductoPanel.this), producto);
-                    dialog.setVisible(true);
-                }
+        panelInferior.add(botonAnadir);
+        panelInferior.add(botonEditar);
+        panelInferior.add(botonEliminar);
+        panelInferior.add(botonMostrarDetalles);
+        add(panelInferior, BorderLayout.SOUTH);
+
+        // Acción Buscar
+        botonBuscar.addActionListener(e -> {
+            String texto = campoBuscar.getText();
+            if (texto.trim().length() == 0) {
+                sorter.setRowFilter(null);
+            } else {
+                sorter.setRowFilter(RowFilter.regexFilter("(?i)" + texto));
             }
         });
-    }
 
-    private void cargarProductos() {
-        ProductoDAO dao = new ProductoDAO(null);
-        List<Producto> productos = dao.obtenerTodos();
-        for (Producto p : productos) {
-            modelo.addRow(new Object[]{
-                    p.getNombre(),
-                    String.valueOf(p.getPrecio()),
-                    p.getCategoria(),
-                    p.getTalla(),
-                    p.getColor(),
-                    String.valueOf(p.getStock()),
-                    ImageUtils.cargarMiniatura(p.getImagen(), 40, 40)
-            });
+        // Acción Mostrar Detalles
+        botonMostrarDetalles.addActionListener(e -> {
+            int fila = tabla.getSelectedRow();
+            if (fila >= 0) {
+                int modeloFila = tabla.convertRowIndexToModel(fila);
+                Producto producto = tableModel.getProductoAt(modeloFila);
+                new DetalleProductoDialog(null, producto).setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Seleccione un producto.");
+            }
+        });
+
+        // Acción Añadir con el nuevo diálogo
+        botonAnadir.addActionListener(e -> {
+            NuevoProductoDialog dialogo = new NuevoProductoDialog();
+            dialogo.setVisible(true);
+
+            if (dialogo.seGuardo()) {
+                Producto nuevo = dialogo.getProductoCreado();
+                ProductoDAO dao = new ProductoDAO(ConexionBD.getConexion());
+                dao.insertarProducto(nuevo);
+                tableModel.agregarProducto(nuevo);
+            }
+        });
+
+        // Control de botones por rol
+        if (!rolUsuario.equalsIgnoreCase("gestor") && !rolUsuario.equalsIgnoreCase("empleado")) {
+            botonAnadir.setEnabled(false);
+            botonEditar.setEnabled(false);
+            botonEliminar.setEnabled(false);
         }
-    }
-
-    private Producto getProductoEnFila(int fila) {
-        String nombre = (String) modelo.getValueAt(fila, 0);
-        ProductoDAO dao = new ProductoDAO(null);
-        return dao.buscarPorNombre(nombre);
     }
 }

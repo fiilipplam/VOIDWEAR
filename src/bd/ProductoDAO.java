@@ -8,18 +8,16 @@ import modelo.Producto;
 
 public class ProductoDAO {
 
-	private Connection conexion;
+    private Connection conexion;
 
     public ProductoDAO(Connection conexion) {
         this.setConexion(conexion);
     }
 
-	public void insertarProducto(Producto producto) {
+    public void insertarProducto(Producto producto) {
         String sql = "INSERT INTO producto (nombre, precio, categoria, talla, color, stock, imagen) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection con = ConexionBD.getConexion();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
             ps.setString(1, producto.getNombre());
             ps.setDouble(2, producto.getPrecio());
             ps.setString(3, producto.getCategoria());
@@ -35,12 +33,10 @@ public class ProductoDAO {
         }
     }
 
-    public void modificarProducto(Producto producto) {
-        String sql = "UPDATE producto SET nombre = ?, precio = ?, categoria = ?, talla = ?, color = ?, stock = ?, imagen = ? WHERE id_producto = ?";
+    public void actualizarProducto(Producto producto) {
+        String sql = "UPDATE producto SET nombre=?, precio=?, categoria=?, talla=?, color=?, stock=?, imagen=? WHERE id_producto=?";
 
-        try (Connection con = ConexionBD.getConexion();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
             ps.setString(1, producto.getNombre());
             ps.setDouble(2, producto.getPrecio());
             ps.setString(3, producto.getCategoria());
@@ -58,25 +54,21 @@ public class ProductoDAO {
     }
 
     public void eliminarProducto(int idProducto) {
-        String sql = "DELETE FROM producto WHERE id_producto = ?";
+        String sql = "DELETE FROM producto WHERE id_producto=?";
 
-        try (Connection con = ConexionBD.getConexion();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
             ps.setInt(1, idProducto);
             ps.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public List<Producto> obtenerTodos() {
+    public List<Producto> listarProductos() {
         List<Producto> productos = new ArrayList<>();
         String sql = "SELECT * FROM producto";
 
-        try (Connection con = ConexionBD.getConexion();
-             PreparedStatement ps = con.prepareStatement(sql);
+        try (PreparedStatement ps = conexion.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
@@ -89,7 +81,6 @@ public class ProductoDAO {
                 p.setColor(rs.getString("color"));
                 p.setStock(rs.getInt("stock"));
                 p.setImagen(rs.getString("imagen"));
-
                 productos.add(p);
             }
 
@@ -100,11 +91,11 @@ public class ProductoDAO {
         return productos;
     }
 
-	public Connection getConexion() {
-		return conexion;
-	}
+    public Connection getConexion() {
+        return conexion;
+    }
 
-	public void setConexion(Connection conexion) {
-		this.conexion = conexion;
-	}
+    public void setConexion(Connection conexion) {
+        this.conexion = conexion;
+    }
 }
