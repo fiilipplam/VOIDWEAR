@@ -1,15 +1,16 @@
 package modelo;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
-public class Usuario {
+public class Usuario implements Serializable {
+
     @Id
-    @GeneratedValue
-    private int id;
+    private String correo;
 
     private String nombre;
-    private String correo;
     private String contrasena;
 
     @Enumerated(EnumType.STRING)
@@ -24,17 +25,12 @@ public class Usuario {
         this.rol = rol;
     }
 
-    // Getter necesario para registrar accesos en el log
-    public int getId() {
-        return id;
+    public String getCorreo() {
+        return correo;
     }
 
     public String getNombre() {
         return nombre;
-    }
-
-    public String getCorreo() {
-        return correo;
     }
 
     public String getContrasena() {
@@ -45,12 +41,12 @@ public class Usuario {
         return rol;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public void setContrasena(String contrasena) {
@@ -59,5 +55,18 @@ public class Usuario {
 
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Usuario)) return false;
+        Usuario usuario = (Usuario) o;
+        return correo != null && correo.equals(usuario.correo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(correo);
     }
 }

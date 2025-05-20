@@ -5,156 +5,92 @@ import util.ImageUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.io.File;
 
 public class DetalleProductoDialog extends JDialog {
     private Producto producto;
-    private boolean cambiosGuardados = false;
-    private boolean actualizado = false;
-
-    private JTextField campoNombre;
-    private JTextField campoPrecio;
-    private JTextField campoCategoria;
-    private JTextField campoTalla;
-    private JTextField campoColor;
-    private JTextField campoStock;
     private JLabel etiquetaImagen;
-    private String rutaImagen;
 
     public DetalleProductoDialog(Window owner, Producto producto) {
-        super(owner, "Detalle del Producto", ModalityType.APPLICATION_MODAL);
+        super(owner, "Detalles del Producto", ModalityType.APPLICATION_MODAL);
         this.producto = producto;
-        this.rutaImagen = producto.getImagen();
 
-        setLayout(new BorderLayout());
-        setSize(500, 600);
+        getContentPane().setLayout(new BorderLayout());
+        setSize(800, 511);
         setLocationRelativeTo(owner);
 
-        JPanel panelCentral = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        JPanel panelCentral = new JPanel();
+        panelCentral.setLayout(null);
 
-        campoNombre = new JTextField(producto.getNombre());
-        campoPrecio = new JTextField(String.valueOf(producto.getPrecio()));
-        campoCategoria = new JTextField(producto.getCategoria());
-        campoTalla = new JTextField(producto.getTalla());
-        campoColor = new JTextField(producto.getColor());
-        campoStock = new JTextField(String.valueOf(producto.getStock()));
+        // Etiquetas de campo
+        JLabel lblNombre = new JLabel("Nombre:");
+        lblNombre.setBounds(409, 116, 100, 25);
+        panelCentral.add(lblNombre);
+
+        JLabel lblPrecio = new JLabel("Precio:");
+        lblPrecio.setBounds(409, 156, 100, 25);
+        panelCentral.add(lblPrecio);
+
+        JLabel lblCategoria = new JLabel("Categoría:");
+        lblCategoria.setBounds(409, 196, 100, 25);
+        panelCentral.add(lblCategoria);
+
+        JLabel lblTalla = new JLabel("Talla:");
+        lblTalla.setBounds(409, 236, 100, 25);
+        panelCentral.add(lblTalla);
+
+        JLabel lblColor = new JLabel("Color:");
+        lblColor.setBounds(409, 276, 100, 25);
+        panelCentral.add(lblColor);
+
+        JLabel lblStock = new JLabel("Stock:");
+        lblStock.setBounds(409, 316, 100, 25);
+        panelCentral.add(lblStock);
+
+        // Valores como JLabels
+        JLabel valNombre = new JLabel(producto.getNombre());
+        valNombre.setBounds(509, 116, 200, 25);
+        panelCentral.add(valNombre);
+
+        JLabel valPrecio = new JLabel(String.valueOf(producto.getPrecio()));
+        valPrecio.setBounds(509, 156, 200, 25);
+        panelCentral.add(valPrecio);
+
+        JLabel valCategoria = new JLabel(producto.getCategoria());
+        valCategoria.setBounds(509, 196, 200, 25);
+        panelCentral.add(valCategoria);
+
+        JLabel valTalla = new JLabel(producto.getTalla());
+        valTalla.setBounds(509, 236, 200, 25);
+        panelCentral.add(valTalla);
+
+        JLabel valColor = new JLabel(producto.getColor());
+        valColor.setBounds(509, 276, 200, 25);
+        panelCentral.add(valColor);
+
+        JLabel valStock = new JLabel(String.valueOf(producto.getStock()));
+        valStock.setBounds(509, 316, 200, 25);
+        panelCentral.add(valStock);
+
+        // Imagen del producto
         etiquetaImagen = new JLabel();
         etiquetaImagen.setHorizontalAlignment(SwingConstants.CENTER);
-        cargarImagen(rutaImagen);
+        etiquetaImagen.setBounds(50, 73, 300, 300);
+        cargarImagen(producto.getImagen());
+        panelCentral.add(etiquetaImagen);
 
-        int fila = 0;
+        getContentPane().add(panelCentral, BorderLayout.CENTER);
 
-        gbc.gridx = 0; gbc.gridy = fila;
-        panelCentral.add(new JLabel("Nombre:"), gbc);
-        gbc.gridx = 1;
-        panelCentral.add(campoNombre, gbc);
-
-        fila++;
-        gbc.gridx = 0; gbc.gridy = fila;
-        panelCentral.add(new JLabel("Precio:"), gbc);
-        gbc.gridx = 1;
-        panelCentral.add(campoPrecio, gbc);
-
-        fila++;
-        gbc.gridx = 0; gbc.gridy = fila;
-        panelCentral.add(new JLabel("Categoría:"), gbc);
-        gbc.gridx = 1;
-        panelCentral.add(campoCategoria, gbc);
-
-        fila++;
-        gbc.gridx = 0; gbc.gridy = fila;
-        panelCentral.add(new JLabel("Talla:"), gbc);
-        gbc.gridx = 1;
-        panelCentral.add(campoTalla, gbc);
-
-        fila++;
-        gbc.gridx = 0; gbc.gridy = fila;
-        panelCentral.add(new JLabel("Color:"), gbc);
-        gbc.gridx = 1;
-        panelCentral.add(campoColor, gbc);
-
-        fila++;
-        gbc.gridx = 0; gbc.gridy = fila;
-        panelCentral.add(new JLabel("Stock:"), gbc);
-        gbc.gridx = 1;
-        panelCentral.add(campoStock, gbc);
-
-        fila++;
-        gbc.gridx = 0; gbc.gridy = fila;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.CENTER;
-        panelCentral.add(etiquetaImagen, gbc);
-
-        fila++;
-        gbc.gridy = fila;
-        JButton botonCambiarImagen = new JButton("Cambiar Imagen");
-        panelCentral.add(botonCambiarImagen, gbc);
-
-        add(panelCentral, BorderLayout.CENTER);
-
+        // Botón cerrar
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton botonGuardar = new JButton("Guardar");
-        JButton botonCancelar = new JButton("Cancelar");
-        panelBotones.add(botonCancelar);
-        panelBotones.add(botonGuardar);
-        panelBotones.add(botonCambiarImagen);
-        add(panelBotones, BorderLayout.SOUTH);
+        JButton botonCerrar = new JButton("Cerrar");
+        panelBotones.add(botonCerrar);
+        getContentPane().add(panelBotones, BorderLayout.SOUTH);
 
-        botonCambiarImagen.addActionListener(e -> cambiarImagen());
-        botonCancelar.addActionListener(e -> dispose());
-        botonGuardar.addActionListener(this::guardarCambios);
+        botonCerrar.addActionListener(e -> dispose());
     }
 
     private void cargarImagen(String ruta) {
         ImageIcon icono = ImageUtils.cargarMiniatura(ruta, 300, 300);
         etiquetaImagen.setIcon(icono);
-    }
-
-    private void cambiarImagen() {
-        JFileChooser selector = new JFileChooser("recursos/imagenes/productos");
-        selector.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        int resultado = selector.showOpenDialog(this);
-        if (resultado == JFileChooser.APPROVE_OPTION) {
-            File archivo = selector.getSelectedFile();
-            String rutaAbsoluta = archivo.getAbsolutePath().replace("\\", "/");
-            int index = rutaAbsoluta.indexOf("recursos/");
-            if (index != -1) {
-                rutaImagen = rutaAbsoluta.substring(index);
-                etiquetaImagen.setText(archivo.getName());
-                cargarImagen(rutaImagen);
-            } else {
-                JOptionPane.showMessageDialog(this, "La imagen debe estar en la carpeta recursos/imagenes/productos");
-                rutaImagen = null;
-            }
-        }
-    }
-
-
-    private void guardarCambios(ActionEvent e) {
-        try {
-            producto.setNombre(campoNombre.getText());
-            producto.setPrecio(Double.parseDouble(campoPrecio.getText()));
-            producto.setCategoria(campoCategoria.getText());
-            producto.setTalla(campoTalla.getText());
-            producto.setColor(campoColor.getText());
-            producto.setStock(Integer.parseInt(campoStock.getText()));
-            producto.setImagen(rutaImagen);
-            cambiosGuardados = true;
-            dispose();
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Error en los datos numéricos.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    public boolean seGuardaronCambios() {
-        return cambiosGuardados;
-    }
-
-    public Producto getProductoActualizado() {
-        return producto;
     }
 }

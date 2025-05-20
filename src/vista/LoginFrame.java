@@ -3,14 +3,10 @@ package vista;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
-import javax.persistence.*;
-
-import bd.ConexionBD;
 import modelo.Usuario;
+import modelo.Rol;
+import bd.UsuarioDAO;
 
 public class LoginFrame extends JFrame {
 
@@ -46,62 +42,34 @@ public class LoginFrame extends JFrame {
         add(panel, BorderLayout.CENTER);
 
         btnIniciarSesion.addActionListener(this::autenticarUsuario);
-        btnInvitado.addActionListener(e -> abrirComoInvitado());
+        btnInvitado.addActionListener(e -> accederComoInvitado());
     }
 
     private void autenticarUsuario(ActionEvent e) {
         String correo = txtCorreo.getText().trim();
         String contrasena = new String(txtContrasena.getPassword()).trim();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("voidwearPU");
-        EntityManager em = emf.createEntityManager();
+        if (correo.isEmpty() || contrasena.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos.");
+            return;
+        }
 
-        try {
-            TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.correo = :correo AND u.contrasena = :contrasena", Usuario.class);
-            query.setParameter("correo", correo);
-            query.setParameter("contrasena", contrasena);
-            List<Usuario> resultado = query.getResultList();
-
-            if (!resultado.isEmpty()) {
-                Usuario usuario = resultado.get(0);
-                registrarAcceso(usuario.getId(), "Acceso exitoso");
-                JOptionPane.showMessageDialog(this, "Bienvenido, " + usuario.getNombre());
-
-                // Aquí deberías abrir el MainFrame según el rol
-                // Ejemplo: new MainFrame(usuario).setVisible(true);
+        List<Usuario> usuarios = UsuarioDAO.obtenerTodos();
+        for (Usuario u : usuarios) {
+            if (u.getCorreo().equalsIgnoreCase(correo) && u.getContrasena().equals(contrasena)) {
+                JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.");
                 dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
+                new MainFrame(u).setVisible(true);
+                return;
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error en la autenticación.", "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            em.close();
-            emf.close();
         }
+
+        JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.");
     }
 
-    private void abrirComoInvitado() {
-        registrarAcceso(null, "Acceso como invitado");
-        JOptionPane.showMessageDialog(this, "Has accedido como invitado.");
-        // Aquí abrirías la vista del catálogo como invitado
-        // new CatalogoInvitadoFrame().setVisible(true);
+    private void accederComoInvitado() {
+        Usuario invitado = new Usuario("Invitado", "invitado@voidwear.com", "", Rol.CLIENTE);
+        new MainFrame(invitado).setVisible(true);
         dispose();
-    }
-
-    private void registrarAcceso(Integer idUsuario, String evento) {
-        try (Connection conn = ConexionBD.getConexion()) {
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO log (id_usuario, evento) VALUES (?, ?)");
-            if (idUsuario != null) {
-                ps.setInt(1, idUsuario);
-            } else {
-                ps.setNull(1, java.sql.Types.INTEGER);
-            }
-            ps.setString(2, evento);
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
     }
 }

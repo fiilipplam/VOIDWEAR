@@ -3,6 +3,10 @@ package vista;
 import javax.swing.*;
 
 import bd.ProductoDAO;
+import vista.InicioPanel;
+import vista.PedidosPanel;
+
+
 
 import java.awt.*;
 import modelo.Usuario;
@@ -85,31 +89,32 @@ public class MainFrame extends JFrame {
         JButton btnExportarXML = new JButton("Exportar XML");
 
         // Acciones de botones
-        btnInicio.addActionListener(e -> mostrarPanel(new JPanel())); // PanelInicio
+        btnInicio.addActionListener(e -> mostrarPanel(new InicioPanel (usuario))); // PanelInicio
         btnProductos.addActionListener(e -> {
             ProductoDAO dao = new ProductoDAO(bd.ConexionBD.getConexion()); // ✅ conexión válida
             List<Producto> productos = dao.listarProductos();
             mostrarPanel(new ProductoPanel(productos, usuario.getRol().toString()));
         });
 
-        btnPedidos.addActionListener(e -> mostrarPanel(new JPanel())); // PanelPedidos
-        btnUsuarios.addActionListener(e -> mostrarPanel(new JPanel())); // PanelUsuarios
-        btnLogs.addActionListener(e -> mostrarPanel(new JPanel())); // PanelLogs
+        btnPedidos.addActionListener(e -> mostrarPanel(new PedidosPanel(usuario))); // PanelPedidos
+        btnUsuarios.addActionListener(e -> mostrarPanel(new UsuariosPanel(usuario))); // PanelUsuarios
+        btnLogs.addActionListener(e -> mostrarPanel(new LogsPanel(usuario))); // PanelLogs
         btnExportarXML.addActionListener(e -> mostrarPanel(new JPanel())); // PanelExportar
 
-        // Añadir botones según el rol
+     // Añadir botones según el rol
         panelLateral.add(btnInicio);
         panelLateral.add(btnProductos);
 
-        if (usuario.getRol() == Rol.GESTOR || usuario.getRol() == Rol.EMPLEADO) {
-            panelLateral.add(btnPedidos);
-        }
+        // Todos los roles pueden ver pedidos
+        panelLateral.add(btnPedidos);
 
+        // Solo gestor puede ver estos botones
         if (usuario.getRol() == Rol.GESTOR) {
             panelLateral.add(btnUsuarios);
             panelLateral.add(btnLogs);
             panelLateral.add(btnExportarXML);
         }
+
 
         // Panel central
         panelCentral = new JPanel(new BorderLayout());

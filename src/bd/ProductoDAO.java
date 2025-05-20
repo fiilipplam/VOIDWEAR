@@ -90,6 +90,32 @@ public class ProductoDAO {
 
         return productos;
     }
+    
+    public static List<Producto> obtenerTodos() {
+        List<Producto> lista = new ArrayList<>();
+        String sql = "SELECT * FROM producto";
+        try (Connection con = ConexionBD.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Producto p = new Producto(
+                    rs.getInt("id_producto"),
+                    rs.getString("nombre"),
+                    rs.getDouble("precio"),
+                    rs.getString("categoria"),
+                    rs.getString("talla"),
+                    rs.getString("color"),
+                    rs.getInt("stock"),
+                    rs.getString("imagen")
+                );
+                lista.add(p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
 
     public Connection getConexion() {
         return conexion;

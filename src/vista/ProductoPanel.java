@@ -98,12 +98,24 @@ public class ProductoPanel extends JPanel {
             }
         });
 
-        // Control de botones por rol
-        if (!rolUsuario.equalsIgnoreCase("gestor") && !rolUsuario.equalsIgnoreCase("empleado")) {
+     // Control de botones por rol
+        if (rolUsuario.equalsIgnoreCase("gestor")) {
+            // El gestor tiene acceso completo
+            botonAnadir.setEnabled(true);
+            botonEditar.setEnabled(true);
+            botonEliminar.setEnabled(true);
+        } else if (rolUsuario.equalsIgnoreCase("empleado")) {
+            // El empleado solo puede editar
+            botonAnadir.setEnabled(false);
+            botonEditar.setEnabled(true);
+            botonEliminar.setEnabled(false);
+        } else {
+            // Otros roles (cliente, invitado, etc.) no tienen permisos
             botonAnadir.setEnabled(false);
             botonEditar.setEnabled(false);
             botonEliminar.setEnabled(false);
         }
+
         
         botonEditar.addActionListener(e -> {
             int fila = tabla.getSelectedRow();
@@ -111,7 +123,7 @@ public class ProductoPanel extends JPanel {
                 int modeloFila = tabla.convertRowIndexToModel(fila);
                 Producto producto = tableModel.getProductoAt(modeloFila);
 
-                DetalleProductoDialog dialogo = new DetalleProductoDialog(null, producto);
+                EditarProductoDialog dialogo = new EditarProductoDialog(null, producto);
                 dialogo.setVisible(true);
 
                 if (dialogo.seGuardaronCambios()) {

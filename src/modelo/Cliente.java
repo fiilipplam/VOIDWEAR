@@ -1,5 +1,8 @@
 package modelo;
 
+import bd.ClienteDAO;
+import bd.UsuarioDAO;
+
 public class Cliente {
     private int idCliente;
     private String direccion;
@@ -46,4 +49,13 @@ public class Cliente {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
+    
+    @Override
+    public String toString() {
+        return ClienteDAO.obtenerNombreSQL(idUsuario) + " (ID Cliente: " + idCliente + ")";
+    }
+
+
+
+
 }
