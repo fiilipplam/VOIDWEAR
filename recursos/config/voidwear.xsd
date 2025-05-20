@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="voidwear">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="productos">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="producto" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="nombre" type="xs:string"/>
+                    <xs:element name="precio" type="xs:decimal"/>
+                    <xs:element name="categoria" type="xs:string"/>
+                    <xs:element name="talla" type="xs:string"/>
+                    <xs:element name="color" type="xs:string"/>
+                    <xs:element name="stock" type="xs:int"/>
+                  </xs:sequence>
+                  <xs:attribute name="id" type="xs:int" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="usuarios">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="usuario" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="nombre" type="xs:string"/>
+                    <xs:element name="rol" type="xs:string"/>
+                  </xs:sequence>
+                  <xs:attribute name="correo" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="clientes">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="cliente" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="direccion" type="xs:string"/>
+                    <xs:element name="telefono" type="xs:string"/>
+                    <xs:element name="id_usuario" type="xs:int"/>
+                  </xs:sequence>
+                  <xs:attribute name="id" type="xs:int" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="pedidos">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="pedido" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="fecha" type="xs:date"/>
+                    <xs:element name="id_cliente" type="xs:int"/>
+                    <xs:element name="lineas">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="linea" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:attribute name="producto" type="xs:string" use="required"/>
+                              <xs:attribute name="cantidad" type="xs:int" use="required"/>
+                              <xs:attribute name="precio_unitario" type="xs:decimal" use="required"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="id" type="xs:int" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

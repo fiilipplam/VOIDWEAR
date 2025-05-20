@@ -32,6 +32,34 @@ public class ProductoDAO {
             e.printStackTrace();
         }
     }
+    
+    public static Producto obtenerPorId(int idProducto) {
+        String sql = "SELECT * FROM producto WHERE id_producto = ?";
+        try (Connection con = ConexionBD.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idProducto);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return new Producto(
+                    rs.getInt("id_producto"),
+                    rs.getString("nombre"),
+                    rs.getDouble("precio"),
+                    rs.getString("categoria"),
+                    rs.getString("talla"),
+                    rs.getString("color"),
+                    rs.getInt("stock"),
+                    rs.getString("imagen")
+                );
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     public void actualizarProducto(Producto producto) {
         String sql = "UPDATE producto SET nombre=?, precio=?, categoria=?, talla=?, color=?, stock=?, imagen=? WHERE id_producto=?";

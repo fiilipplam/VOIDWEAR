@@ -10,6 +10,7 @@ import vista.PedidosPanel;
 
 import java.awt.*;
 import modelo.Usuario;
+import util.ExportadorXML;
 import modelo.Producto;
 import modelo.Rol;
 import java.util.List;
@@ -99,7 +100,7 @@ public class MainFrame extends JFrame {
         btnPedidos.addActionListener(e -> mostrarPanel(new PedidosPanel(usuario))); // PanelPedidos
         btnUsuarios.addActionListener(e -> mostrarPanel(new UsuariosPanel(usuario))); // PanelUsuarios
         btnLogs.addActionListener(e -> mostrarPanel(new LogsPanel(usuario))); // PanelLogs
-        btnExportarXML.addActionListener(e -> mostrarPanel(new JPanel())); // PanelExportar
+        btnExportarXML.addActionListener(e -> ExportadorXML.exportar(usuario)); // PanelExportar
 
      // Añadir botones según el rol
         panelLateral.add(btnInicio);

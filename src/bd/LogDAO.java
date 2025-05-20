@@ -34,4 +34,23 @@ public class LogDAO {
 
         return lista;
     }
+    
+    public static void insertar(Log log) {
+        String sql = "INSERT INTO log (fecha_hora, usuario, tipo_evento, mensaje) VALUES (?, ?, ?, ?)";
+
+        try (Connection con = ConexionBD.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, log.getFechaHora().toString());
+            ps.setString(2, log.getUsuario());
+            ps.setString(3, log.getTipoEvento());
+            ps.setString(4, log.getMensaje());
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 package util;
 
 import modelo.Log;
+import modelo.Usuario;
 import bd.ConexionBD;
 
 import java.io.BufferedWriter;
@@ -14,10 +15,18 @@ public class LogManager {
 
     private static final String ARCHIVO_LOG = "logs/eventos.txt";
 
+    // ✅ Método principal: permite registrar con strings
     public static void registrar(String usuario, String tipoEvento, String mensaje) {
         Log log = new Log(LocalDateTime.now(), usuario, tipoEvento, mensaje);
         guardarEnArchivo(log);
         guardarEnBD(log);
+    }
+
+    // ✅ Método sobrecargado: permite registrar con objeto Usuario
+    public static void registrar(Usuario usuario, String tipoEvento, String mensaje) {
+        if (usuario != null) {
+            registrar(usuario.getCorreo(), tipoEvento, mensaje);
+        }
     }
 
     private static void guardarEnArchivo(Log log) {
