@@ -9,7 +9,11 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 
 public class EditarProductoDialog extends JDialog {
-    private Producto producto;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2765952674077970217L;
+	private Producto producto;
     private boolean cambiosGuardados = false;
 
     private JTextField campoNombre;

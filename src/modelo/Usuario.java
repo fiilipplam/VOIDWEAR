@@ -1,72 +1,84 @@
 package modelo;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
 
 @Entity
 public class Usuario implements Serializable {
 
-    @Id
-    private String correo;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6236610328319541172L;
 
-    private String nombre;
-    private String contrasena;
+	@Id
+	private String correo;
 
-    @Enumerated(EnumType.STRING)
-    private Rol rol;
+	private String nombre;
+	private String contrasena;
 
-    public Usuario() {}
+	@Enumerated(EnumType.STRING)
+	private Rol rol;
 
-    public Usuario(String nombre, String correo, String contrasena, Rol rol) {
-        this.nombre = nombre;
-        this.correo = correo;
-        this.contrasena = contrasena;
-        this.rol = rol;
-    }
+	public Usuario() {
+	}
 
-    public String getCorreo() {
-        return correo;
-    }
+	public Usuario(String nombre, String correo, String contrasena, Rol rol) {
+		this.nombre = nombre;
+		this.correo = correo;
+		this.contrasena = contrasena;
+		this.rol = rol;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	public String getCorreo() {
+		return correo;
+	}
 
-    public String getContrasena() {
-        return contrasena;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public Rol getRol() {
-        return rol;
-    }
+	public String getContrasena() {
+		return contrasena;
+	}
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
+	public Rol getRol() {
+		return rol;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public void setRol(Rol rol) {
-        this.rol = rol;
-    }
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Usuario)) return false;
-        Usuario usuario = (Usuario) o;
-        return correo != null && correo.equals(usuario.correo);
-    }
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(correo);
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (!(o instanceof Usuario))
+			return false;
+		Usuario usuario = (Usuario) o;
+		return correo != null && correo.equals(usuario.correo);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(correo);
+	}
 }

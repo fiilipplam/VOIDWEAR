@@ -133,3 +133,25 @@ Configuration path: ?
 [2025-05-21 01:36:46 #3 type] 
 Type modelo.Usuario is not enhanced.
 
+------------------------------------------------------------------------------------------------------------------------
+
+[2025-05-21 01:38:55 #1 store] 
+Database 'D:\felipe\workspace\VOIDWEAR\recursos\config\usuarios.odb' is opened by 15264@LAPTOP-TJ62EN1I
+
+[2025-05-21 01:38:55 #2 store] 
+Configuration path: ?
+
+[2025-05-21 01:38:55 #3 type] 
+Type modelo.Usuario is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2025-05-21 11:04:52 #1 store] 
+Database 'D:\felipe\workspace\VOIDWEAR\recursos\config\usuarios.odb' is opened by 16636@LAPTOP-TJ62EN1I
+
+[2025-05-21 11:04:52 #2 store] 
+Configuration path: ?
+
+[2025-05-21 11:04:52 #3 type] 
+Type modelo.Usuario is not enhanced.
+
