@@ -3,11 +3,19 @@
   <productos>
     <producto id="1">
       <nombre>Producto1</nombre>
-      <precio>60.03</precio>
+      <precio>40.03</precio>
       <categoria>Camisetas</categoria>
       <talla>XL</talla>
       <color>Rojo</color>
       <stock>31</stock>
+    </producto>
+    <producto id="2">
+      <nombre>Producto2</nombre>
+      <precio>21.52</precio>
+      <categoria>Pantalones</categoria>
+      <talla>S</talla>
+      <color>Gris</color>
+      <stock>41</stock>
     </producto>
     <producto id="3">
       <nombre>Producto3</nombre>
@@ -468,7 +476,7 @@
       <fecha>2023-07-29</fecha>
       <id_cliente>4</id_cliente>
       <lineas>
-        <linea cantidad="3" precio_unitario="60.03" producto="Producto1"/>
+        <linea cantidad="3" precio_unitario="40.03" producto="Producto1"/>
         <linea cantidad="3" precio_unitario="98.12" producto="Producto9"/>
         <linea cantidad="2" precio_unitario="45.46" producto="Producto13"/>
       </lineas>
@@ -500,7 +508,7 @@
       <fecha>2023-05-03</fecha>
       <id_cliente>8</id_cliente>
       <lineas>
-        <linea cantidad="1" precio_unitario="60.03" producto="Producto1"/>
+        <linea cantidad="1" precio_unitario="40.03" producto="Producto1"/>
         <linea cantidad="2" precio_unitario="61.88" producto="Producto11"/>
         <linea cantidad="1" precio_unitario="45.46" producto="Producto13"/>
       </lineas>
@@ -534,7 +542,7 @@
       <fecha>2024-02-18</fecha>
       <id_cliente>12</id_cliente>
       <lineas>
-        <linea cantidad="2" precio_unitario="60.03" producto="Producto1"/>
+        <linea cantidad="2" precio_unitario="40.03" producto="Producto1"/>
       </lineas>
     </pedido>
     <pedido id="13">
@@ -604,6 +612,7 @@
       <fecha>2023-06-28</fecha>
       <id_cliente>22</id_cliente>
       <lineas>
+        <linea cantidad="1" precio_unitario="21.52" producto="Producto2"/>
         <linea cantidad="1" precio_unitario="70.61" producto="Producto3"/>
         <linea cantidad="1" precio_unitario="73.68" producto="Producto5"/>
       </lineas>
@@ -629,6 +638,7 @@
       <fecha>2023-05-22</fecha>
       <id_cliente>25</id_cliente>
       <lineas>
+        <linea cantidad="3" precio_unitario="21.52" producto="Producto2"/>
         <linea cantidad="3" precio_unitario="70.61" producto="Producto3"/>
       </lineas>
     </pedido>
@@ -644,6 +654,7 @@
       <fecha>2023-10-24</fecha>
       <id_cliente>27</id_cliente>
       <lineas>
+        <linea cantidad="2" precio_unitario="21.52" producto="Producto2"/>
         <linea cantidad="1" precio_unitario="45.46" producto="Producto13"/>
       </lineas>
     </pedido>
@@ -697,6 +708,7 @@
       <fecha>2023-06-15</fecha>
       <id_cliente>34</id_cliente>
       <lineas>
+        <linea cantidad="1" precio_unitario="21.52" producto="Producto2"/>
         <linea cantidad="3" precio_unitario="54.81" producto="Producto6"/>
         <linea cantidad="2" precio_unitario="61.88" producto="Producto11"/>
       </lineas>
@@ -726,6 +738,7 @@
       <fecha>2023-06-09</fecha>
       <id_cliente>38</id_cliente>
       <lineas>
+        <linea cantidad="1" precio_unitario="21.52" producto="Producto2"/>
         <linea cantidad="2" precio_unitario="98.12" producto="Producto9"/>
       </lineas>
     </pedido>
@@ -756,6 +769,7 @@
       <fecha>2024-03-13</fecha>
       <id_cliente>42</id_cliente>
       <lineas>
+        <linea cantidad="1" precio_unitario="21.52" producto="Producto2"/>
         <linea cantidad="3" precio_unitario="59.56" producto="Producto4"/>
         <linea cantidad="2" precio_unitario="42.89" producto="Producto12"/>
       </lineas>
@@ -779,6 +793,7 @@
       <fecha>2023-01-17</fecha>
       <id_cliente>45</id_cliente>
       <lineas>
+        <linea cantidad="3" precio_unitario="21.52" producto="Producto2"/>
         <linea cantidad="3" precio_unitario="92.66" producto="Producto8"/>
       </lineas>
     </pedido>
@@ -824,7 +839,7 @@
       <fecha>2023-11-18</fecha>
       <id_cliente>51</id_cliente>
       <lineas>
-        <linea cantidad="3" precio_unitario="60.03" producto="Producto1"/>
+        <linea cantidad="3" precio_unitario="40.03" producto="Producto1"/>
         <linea cantidad="1" precio_unitario="92.66" producto="Producto8"/>
         <linea cantidad="2" precio_unitario="88.75" producto="Producto14"/>
       </lineas>
@@ -888,9 +903,10 @@
     </pedido>
     <pedido id="59">
       <fecha>2025-05-21</fecha>
-      <id_cliente>56</id_cliente>
+      <id_cliente>12</id_cliente>
       <lineas>
-        <linea cantidad="1" precio_unitario="1111.01" producto="pantalones"/>
+        <linea cantidad="3" precio_unitario="40.03" producto="Producto1"/>
+        <linea cantidad="3" precio_unitario="92.66" producto="Producto8"/>
       </lineas>
     </pedido>
   </pedidos>
