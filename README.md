@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="recursos/imagenes/logos/logo_detallado.png" alt="VoidWear Logo" width="300"/>
+</p>
 
 # VOIDWEAR
 
