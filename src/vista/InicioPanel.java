@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package vista;
 
 import modelo.Usuario;
@@ -5,15 +12,29 @@ import modelo.Usuario;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The Class InicioPanel.
+ */
 public class InicioPanel extends JPanel {
 
+    /**
+	 * The usuario.
+	 */
     private Usuario usuario;
 
+    /**
+	 * Instantiates a new inicio panel.
+	 *
+	 * @param usuario the usuario
+	 */
     public InicioPanel(Usuario usuario) {
         this.usuario = usuario;
         inicializarComponentes();
     }
 
+    /**
+	 * Inicializar componentes.
+	 */
     private void inicializarComponentes() {
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
@@ -55,6 +76,13 @@ public class InicioPanel extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
     }
 
+    /**
+	 * Agregar seccion.
+	 *
+	 * @param panel     the panel
+	 * @param titulo    the titulo
+	 * @param contenido the contenido
+	 */
     private void agregarSeccion(JPanel panel, String titulo, String contenido) {
         JLabel lblTitulo = new JLabel(titulo);
         lblTitulo.setFont(new Font("SansSerif", Font.BOLD, 18));

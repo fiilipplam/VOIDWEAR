@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package bd;
 
 import java.sql.Connection;
@@ -9,8 +16,17 @@ import java.util.List;
 
 import modelo.Cliente;
 
+/**
+ * The Class ClienteDAO.
+ */
 public class ClienteDAO {
 
+	/**
+	 * Obtener por id.
+	 *
+	 * @param idCliente the id cliente
+	 * @return the cliente
+	 */
 	public static Cliente obtenerPorId(int idCliente) {
 		String sql = "SELECT * FROM cliente WHERE id_cliente = ?";
 		try (Connection con = ConexionBD.getConexion(); PreparedStatement ps = con.prepareStatement(sql)) {
@@ -26,6 +42,11 @@ public class ClienteDAO {
 		return null;
 	}
 	
+	/**
+	 * Insertar.
+	 *
+	 * @param cliente the cliente
+	 */
 	public static void insertar(Cliente cliente) {
 	    String sql = "INSERT INTO cliente (direccion, telefono, id_usuario) VALUES (?, ?, ?)";
 
@@ -43,6 +64,12 @@ public class ClienteDAO {
 	}
 
 
+	/**
+	 * Obtener nombre SQL.
+	 *
+	 * @param idUsuario the id usuario
+	 * @return the string
+	 */
 	public static String obtenerNombreSQL(int idUsuario) {
 		String sql = "SELECT nombre FROM usuario WHERE id_usuario = ?";
 		try (Connection con = ConexionBD.getConexion(); PreparedStatement ps = con.prepareStatement(sql)) {
@@ -57,6 +84,12 @@ public class ClienteDAO {
 		return "Desconocido";
 	}
 
+	/**
+	 * Obtener por usuario.
+	 *
+	 * @param correo the correo
+	 * @return the cliente
+	 */
 	public static Cliente obtenerPorUsuario(String correo) {
 	    Cliente cliente = null;
 	    String sql = "SELECT c.* FROM cliente c JOIN usuario u ON c.id_usuario = u.id_usuario WHERE u.correo = ?";
@@ -80,11 +113,23 @@ public class ClienteDAO {
 	}
 
 
+	/**
+	 * Obtener id por usuario.
+	 *
+	 * @param correoUsuario the correo usuario
+	 * @return the int
+	 */
 	public static int obtenerIdPorUsuario(String correoUsuario) {
 		Cliente c = obtenerPorUsuario(correoUsuario);
 		return c != null ? c.getIdCliente() : -1;
 	}
 
+	/**
+	 * Obtener nombre por id.
+	 *
+	 * @param idCliente the id cliente
+	 * @return the string
+	 */
 	public static String obtenerNombrePorId(int idCliente) {
 		String sql = "SELECT u.nombre FROM cliente c JOIN usuario u ON c.id_usuario = u.id_usuario WHERE c.id_cliente = ?";
 		try (Connection con = ConexionBD.getConexion(); PreparedStatement ps = con.prepareStatement(sql)) {
@@ -99,6 +144,11 @@ public class ClienteDAO {
 		return "Desconocido";
 	}
 
+	/**
+	 * Obtener todos.
+	 *
+	 * @return the list
+	 */
 	public static List<Cliente> obtenerTodos() {
 		List<Cliente> lista = new ArrayList<>();
 		String sql = "SELECT * FROM cliente";

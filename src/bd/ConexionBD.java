@@ -1,16 +1,46 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package bd;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * The Class ConexionBD.
+ */
 public class ConexionBD {
+	
+	/**
+	 * The Constant URL.
+	 */
 	private static final String URL = "jdbc:mysql://localhost:3306/voidwear";
+	
+	/**
+	 * The Constant USUARIO.
+	 */
 	private static final String USUARIO = "root";
+	
+	/**
+	 * The Constant CONTRASENA.
+	 */
 	private static final String CONTRASENA = "";
 
+	/**
+	 * The conexion.
+	 */
 	private static Connection conexion;
 
+	/**
+	 * Gets the conexion.
+	 *
+	 * @return the conexion
+	 */
 	// Método para obtener la conexión
 	public static Connection getConexion() {
 		try {
@@ -25,6 +55,9 @@ public class ConexionBD {
 		return conexion;
 	}
 
+	/**
+	 * Cerrar conexion.
+	 */
 	// Método para cerrar la conexión
 	public static void cerrarConexion() {
 		if (conexion != null) {

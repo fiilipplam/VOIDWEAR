@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package vista;
 
 import javax.swing.*;
@@ -11,12 +18,29 @@ import modelo.Sesion;
 import bd.ClienteDAO;
 import bd.UsuarioDAO;
 
+/**
+ * The Class LoginFrame.
+ */
 public class LoginFrame extends JFrame {
 
+    /**
+	 * The Constant serialVersionUID.
+	 */
     private static final long serialVersionUID = 1L;
+    
+    /**
+	 * The txt correo.
+	 */
     private JTextField txtCorreo;
+    
+    /**
+	 * The txt contrasena.
+	 */
     private JPasswordField txtContrasena;
 
+    /**
+	 * Instantiates a new login frame.
+	 */
     public LoginFrame() {
         setTitle("VOIDWEAR - Inicio de sesión");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,6 +72,11 @@ public class LoginFrame extends JFrame {
         btnInvitado.addActionListener(e -> accederComoInvitado());
     }
 
+    /**
+	 * Autenticar usuario.
+	 *
+	 * @param e the e
+	 */
     private void autenticarUsuario(ActionEvent e) {
         String correo = txtCorreo.getText().trim();
         String contrasena = new String(txtContrasena.getPassword()).trim();
@@ -87,6 +116,9 @@ public class LoginFrame extends JFrame {
     }
 
 
+    /**
+	 * Acceder como invitado.
+	 */
     private void accederComoInvitado() {
         Usuario invitado = new Usuario("Invitado", "invitado@voidwear.com", "", Rol.CLIENTE);
         new MainFrame(invitado).setVisible(true);

@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package util;
 
 import java.io.File;
@@ -32,11 +39,26 @@ import modelo.Pedido;
 import modelo.Producto;
 import modelo.Usuario;
 
+/**
+ * The Class ExportadorXML.
+ */
 public class ExportadorXML {
 
+	/**
+	 * The Constant RUTA_XML.
+	 */
 	private static final String RUTA_XML = "recursos/config/voidwear.xml";
+	
+	/**
+	 * The Constant RUTA_XSD.
+	 */
 	private static final String RUTA_XSD = "recursos/config/voidwear.xsd";
 
+	/**
+	 * Exportar.
+	 *
+	 * @param gestor the gestor
+	 */
 	public static void exportar(Usuario gestor) {
 		try {
 			// Crear documento XML
@@ -143,6 +165,14 @@ public class ExportadorXML {
 		}
 	}
 
+	/**
+	 * Crear elemento.
+	 *
+	 * @param doc    the doc
+	 * @param nombre the nombre
+	 * @param valor  the valor
+	 * @return the element
+	 */
 	private static Element crearElemento(Document doc, String nombre, String valor) {
 		Element e = doc.createElement(nombre);
 		e.setTextContent(valor);

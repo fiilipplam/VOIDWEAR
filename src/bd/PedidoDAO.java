@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package bd;
 
 import java.sql.Connection;
@@ -12,8 +19,16 @@ import java.util.List;
 
 import modelo.Pedido;
 
+/**
+ * The Class PedidoDAO.
+ */
 public class PedidoDAO {
 
+	/**
+	 * Obtener todos.
+	 *
+	 * @return the list
+	 */
 	public static List<Pedido> obtenerTodos() {
 		List<Pedido> lista = new ArrayList<>();
 		String sql = "SELECT * FROM pedido";
@@ -30,6 +45,12 @@ public class PedidoDAO {
 		return lista;
 	}
 
+	/**
+	 * Obtener por cliente.
+	 *
+	 * @param idCliente the id cliente
+	 * @return the list
+	 */
 	public static List<Pedido> obtenerPorCliente(int idCliente) {
 		List<Pedido> lista = new ArrayList<>();
 		String sql = "SELECT id_pedido, fecha, id_cliente FROM pedido WHERE id_cliente = ?";
@@ -57,6 +78,13 @@ public class PedidoDAO {
 	}
 
 
+	/**
+	 * Insertar.
+	 *
+	 * @param fecha     the fecha
+	 * @param idCliente the id cliente
+	 * @return the int
+	 */
 	public static int insertar(LocalDate fecha, int idCliente) {
 		String sql = "INSERT INTO pedido (fecha, id_cliente) VALUES (?, ?)";
 		try (Connection con = ConexionBD.getConexion();
@@ -74,6 +102,12 @@ public class PedidoDAO {
 		return -1;
 	}
 
+	/**
+	 * Actualizar.
+	 *
+	 * @param idPedido  the id pedido
+	 * @param idCliente the id cliente
+	 */
 	public static void actualizar(int idPedido, int idCliente) {
 		String sql = "UPDATE pedido SET id_cliente = ? WHERE id_pedido = ?";
 		try (Connection con = ConexionBD.getConexion(); PreparedStatement ps = con.prepareStatement(sql)) {
@@ -85,6 +119,11 @@ public class PedidoDAO {
 		}
 	}
 
+	/**
+	 * Eliminar.
+	 *
+	 * @param idPedido the id pedido
+	 */
 	public static void eliminar(int idPedido) {
 		String sql = "DELETE FROM pedido WHERE id_pedido = ?";
 		try (Connection con = ConexionBD.getConexion(); PreparedStatement ps = con.prepareStatement(sql)) {
@@ -95,6 +134,12 @@ public class PedidoDAO {
 		}
 	}
 
+	/**
+	 * Calcular total pedido.
+	 *
+	 * @param idPedido the id pedido
+	 * @return the double
+	 */
 	public static double calcularTotalPedido(int idPedido) {
 		String sql = "SELECT calcular_total_pedido(?) AS total";
 		try (Connection con = ConexionBD.getConexion(); PreparedStatement ps = con.prepareStatement(sql)) {

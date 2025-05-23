@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package vista;
 
 import modelo.Usuario;
@@ -11,22 +18,60 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 
+/**
+ * The Class UsuariosPanel.
+ */
 public class UsuariosPanel extends JPanel {
 
+    /**
+	 * The tabla usuarios.
+	 */
     private JTable tablaUsuarios;
+    
+    /**
+	 * The modelo tabla.
+	 */
     private UsuarioTableModel modeloTabla;
+    
+    /**
+	 * The sorter.
+	 */
     private TableRowSorter<UsuarioTableModel> sorter;
+    
+    /**
+	 * The campo buscar correo.
+	 */
     private JTextField campoBuscarNombre, campoBuscarCorreo;
+    
+    /**
+	 * The combo rol.
+	 */
     private JComboBox<Rol> comboRol;
+    
+    /**
+	 * The btn eliminar.
+	 */
     private JButton btnAnadir, btnEditar, btnEliminar;
+    
+    /**
+	 * The usuario actual.
+	 */
     private Usuario usuarioActual;
 
+    /**
+	 * Instantiates a new usuarios panel.
+	 *
+	 * @param usuarioActual the usuario actual
+	 */
     public UsuariosPanel(Usuario usuarioActual) {
         this.usuarioActual = usuarioActual;
         inicializarComponentes();
         cargarUsuarios();
     }
 
+    /**
+	 * Inicializar componentes.
+	 */
     private void inicializarComponentes() {
         setLayout(new BorderLayout());
 
@@ -80,6 +125,9 @@ public class UsuariosPanel extends JPanel {
         comboRol.addActionListener(e -> aplicarFiltro());
     }
 
+    /**
+	 * Aplicar filtro.
+	 */
     private void aplicarFiltro() {
         RowFilter<UsuarioTableModel, Object> rf = new RowFilter<>() {
             public boolean include(Entry<? extends UsuarioTableModel, ? extends Object> entry) {
@@ -95,10 +143,18 @@ public class UsuariosPanel extends JPanel {
         sorter.setRowFilter(rf);
     }
 
+    /**
+	 * Cargar usuarios.
+	 */
     private void cargarUsuarios() {
         modeloTabla.setUsuarios(UsuarioDAO.obtenerTodos());
     }
 
+    /**
+	 * Mostrar dialogo.
+	 *
+	 * @param usuario the usuario
+	 */
     private void mostrarDialogo(Usuario usuario) {
         UsuarioDialog dialogo = new UsuarioDialog(SwingUtilities.getWindowAncestor(this), usuario);
         dialogo.setVisible(true);
@@ -107,6 +163,9 @@ public class UsuariosPanel extends JPanel {
         }
     }
 
+    /**
+	 * Editar seleccionado.
+	 */
     private void editarSeleccionado() {
         int fila = tablaUsuarios.getSelectedRow();
         if (fila >= 0) {
@@ -115,6 +174,9 @@ public class UsuariosPanel extends JPanel {
         }
     }
 
+    /**
+	 * Eliminar seleccionado.
+	 */
     private void eliminarSeleccionado() {
         int fila = tablaUsuarios.getSelectedRow();
         if (fila >= 0) {

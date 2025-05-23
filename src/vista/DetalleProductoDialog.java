@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package vista;
 
 import java.awt.BorderLayout;
@@ -14,30 +21,112 @@ import javax.swing.SwingConstants;
 import modelo.Producto;
 import util.ImageUtils;
 
+/**
+ * The Class DetalleProductoDialog.
+ */
 public class DetalleProductoDialog extends JDialog {
+	
 	/**
-	 * 
+	 * The Constant serialVersionUID.
 	 */
 	private static final long serialVersionUID = 6237917594235090269L;
+	
+	/**
+	 * The producto.
+	 */
 	private Producto producto;
+	
+	/**
+	 * The etiqueta imagen.
+	 */
 	private JLabel etiquetaImagen;
+	
+	/**
+	 * The panel central.
+	 */
 	private JPanel panelCentral;
+	
+	/**
+	 * The lbl nombre.
+	 */
 	private JLabel lblNombre;
+	
+	/**
+	 * The lbl precio.
+	 */
 	private JLabel lblPrecio;
+	
+	/**
+	 * The lbl categoria.
+	 */
 	private JLabel lblCategoria;
+	
+	/**
+	 * The lbl talla.
+	 */
 	private JLabel lblTalla;
+	
+	/**
+	 * The lbl color.
+	 */
 	private JLabel lblColor;
+	
+	/**
+	 * The lbl stock.
+	 */
 	private JLabel lblStock;
+	
+	/**
+	 * The val nombre.
+	 */
 	private JLabel valNombre;
+	
+	/**
+	 * The val precio.
+	 */
 	private JLabel valPrecio;
+	
+	/**
+	 * The val categoria.
+	 */
 	private JLabel valCategoria;
+	
+	/**
+	 * The val talla.
+	 */
 	private JLabel valTalla;
+	
+	/**
+	 * The val color.
+	 */
 	private JLabel valColor;
+	
+	/**
+	 * The val stock.
+	 */
 	private JLabel valStock;
+	
+	/**
+	 * The boton cerrar.
+	 */
 	private JButton botonCerrar;
+	
+	/**
+	 * The panel botones.
+	 */
 	private JPanel panelBotones;
+	
+	/**
+	 * The icono.
+	 */
 	private ImageIcon icono;
 
+	/**
+	 * Instantiates a new detalle producto dialog.
+	 *
+	 * @param owner    the owner
+	 * @param producto the producto
+	 */
 	public DetalleProductoDialog(Window owner, Producto producto) {
 		super(owner, "Detalles del Producto", ModalityType.APPLICATION_MODAL);
 		this.producto = producto;
@@ -113,6 +202,11 @@ public class DetalleProductoDialog extends JDialog {
 		botonCerrar.addActionListener(e -> dispose());
 	}
 
+	/**
+	 * Cargar imagen.
+	 *
+	 * @param ruta the ruta
+	 */
 	private void cargarImagen(String ruta) {
 		icono = ImageUtils.cargarMiniatura(ruta, 300, 300);
 		etiquetaImagen.setIcon(icono);

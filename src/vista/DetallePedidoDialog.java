@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package vista;
 
 import java.awt.BorderLayout;
@@ -29,33 +36,112 @@ import modelo.Rol;
 import modelo.Usuario;
 import modelo.Sesion;
 
+/**
+ * The Class DetallePedidoDialog.
+ */
 public class DetallePedidoDialog extends JDialog {
 
 	/**
-	 * 
+	 * The Constant serialVersionUID.
 	 */
 	private static final long serialVersionUID = 6719692910702842172L;
+	
+	/**
+	 * The usuario.
+	 */
 	private Usuario usuario;
+	
+	/**
+	 * The pedido.
+	 */
 	private Pedido pedido;
+	
+	/**
+	 * The guardado.
+	 */
 	private boolean guardado = false;
+	
+	/**
+	 * The editable.
+	 */
 	private boolean editable = true;
 
+	/**
+	 * The combo cliente.
+	 */
 	private JComboBox<Cliente> comboCliente;
+	
+	/**
+	 * The panel productos.
+	 */
 	private JPanel panelProductos;
+	
+	/**
+	 * The label total.
+	 */
 	private JLabel labelTotal;
+	
+	/**
+	 * The panel cliente.
+	 */
 	private JPanel panelCliente;
+	
+	/**
+	 * The fila.
+	 */
 	private JPanel fila;
+	
+	/**
+	 * The lbl.
+	 */
 	private JLabel lbl;
+	
+	/**
+	 * The spinner.
+	 */
 	private JSpinner spinner;
+	
+	/**
+	 * The scroll.
+	 */
 	private JScrollPane scroll;
+	
+	/**
+	 * The panel inferior.
+	 */
 	private JPanel panelInferior;
+	
+	/**
+	 * The btn calcular.
+	 */
 	private JButton btnCalcular;
+	
+	/**
+	 * The btn guardar.
+	 */
 	private JButton btnGuardar;
+	
+	/**
+	 * The btn cancelar.
+	 */
 	private JButton btnCancelar;
+	
+	/**
+	 * The botones.
+	 */
 	private JPanel botones;
 
+	/**
+	 * The spinners.
+	 */
 	private Map<Producto, JSpinner> spinners = new HashMap<>();
 
+	/**
+	 * Instantiates a new detalle pedido dialog.
+	 *
+	 * @param pedido  the pedido
+	 * @param usuario the usuario
+	 */
 	public DetallePedidoDialog(Pedido pedido, Usuario usuario) {
 		super((Frame) null, true);
 		this.usuario = usuario;
@@ -72,6 +158,11 @@ public class DetallePedidoDialog extends JDialog {
 		inicializar();
 	}
 
+	/**
+	 * Sets the editable.
+	 *
+	 * @param editable the new editable
+	 */
 	public void setEditable(boolean editable) {
 		this.editable = editable;
 		comboCliente.setEnabled(editable);
@@ -80,6 +171,9 @@ public class DetallePedidoDialog extends JDialog {
 		}
 	}
 
+	/**
+	 * Inicializar.
+	 */
 	private void inicializar() {
 		setLayout(new BorderLayout());
 
@@ -142,6 +236,9 @@ public class DetallePedidoDialog extends JDialog {
 		}
 	}
 
+	/**
+	 * Cargar pedido.
+	 */
 	private void cargarPedido() {
 		comboCliente.setSelectedItem(ClienteDAO.obtenerPorId(pedido.getIdCliente()));
 		Map<Integer, Integer> cantidades = LineaPedidoDAO.obtenerCantidadPorProducto(pedido.getIdPedido());
@@ -152,6 +249,9 @@ public class DetallePedidoDialog extends JDialog {
 		calcularTotal();
 	}
 
+	/**
+	 * Calcular total.
+	 */
 	private void calcularTotal() {
 		double total = 0;
 		for (Map.Entry<Producto, JSpinner> entry : spinners.entrySet()) {
@@ -161,6 +261,9 @@ public class DetallePedidoDialog extends JDialog {
 		labelTotal.setText("Total: " + String.format("%.2f", total) + " €");
 	}
 
+	/**
+	 * Guardar pedido.
+	 */
 	private void guardarPedido() {
 		Cliente cliente;
 
@@ -205,6 +308,11 @@ public class DetallePedidoDialog extends JDialog {
 	}
 
 
+	/**
+	 * Checks if is guardado.
+	 *
+	 * @return true, if is guardado
+	 */
 	public boolean isGuardado() {
 		return guardado;
 	}

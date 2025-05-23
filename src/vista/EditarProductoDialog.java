@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package vista;
 
 import modelo.Producto;
@@ -8,23 +15,72 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
+/**
+ * The Class EditarProductoDialog.
+ */
 public class EditarProductoDialog extends JDialog {
+    
     /**
-	 * 
+	 * The Constant serialVersionUID.
 	 */
 	private static final long serialVersionUID = 2765952674077970217L;
+	
+	/**
+	 * The producto.
+	 */
 	private Producto producto;
+    
+    /**
+	 * The cambios guardados.
+	 */
     private boolean cambiosGuardados = false;
 
+    /**
+	 * The campo nombre.
+	 */
     private JTextField campoNombre;
+    
+    /**
+	 * The campo precio.
+	 */
     private JTextField campoPrecio;
+    
+    /**
+	 * The campo categoria.
+	 */
     private JTextField campoCategoria;
+    
+    /**
+	 * The campo talla.
+	 */
     private JTextField campoTalla;
+    
+    /**
+	 * The campo color.
+	 */
     private JTextField campoColor;
+    
+    /**
+	 * The campo stock.
+	 */
     private JTextField campoStock;
+    
+    /**
+	 * The etiqueta imagen.
+	 */
     private JLabel etiquetaImagen;
+    
+    /**
+	 * The ruta imagen.
+	 */
     private String rutaImagen;
 
+    /**
+	 * Instantiates a new editar producto dialog.
+	 *
+	 * @param owner    the owner
+	 * @param producto the producto
+	 */
     public EditarProductoDialog(Window owner, Producto producto) {
         super(owner, "Editar Producto", ModalityType.APPLICATION_MODAL);
         this.producto = producto;
@@ -106,11 +162,19 @@ public class EditarProductoDialog extends JDialog {
         botonGuardar.addActionListener(this::guardarCambios);
     }
 
+    /**
+	 * Cargar imagen.
+	 *
+	 * @param ruta the ruta
+	 */
     private void cargarImagen(String ruta) {
         ImageIcon icono = ImageUtils.cargarMiniatura(ruta, 300, 300);
         etiquetaImagen.setIcon(icono);
     }
 
+    /**
+	 * Cambiar imagen.
+	 */
     private void cambiarImagen() {
         JFileChooser selector = new JFileChooser("recursos/imagenes/productos");
         selector.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -130,6 +194,11 @@ public class EditarProductoDialog extends JDialog {
         }
     }
 
+    /**
+	 * Guardar cambios.
+	 *
+	 * @param e the e
+	 */
     private void guardarCambios(ActionEvent e) {
         try {
             producto.setNombre(campoNombre.getText());
@@ -146,10 +215,20 @@ public class EditarProductoDialog extends JDialog {
         }
     }
 
+    /**
+	 * Se guardaron cambios.
+	 *
+	 * @return true, if successful
+	 */
     public boolean seGuardaronCambios() {
         return cambiosGuardados;
     }
 
+    /**
+	 * Gets the producto actualizado.
+	 *
+	 * @return the producto actualizado
+	 */
     public Producto getProductoActualizado() {
         return producto;
     }

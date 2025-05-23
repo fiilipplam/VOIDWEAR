@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package vista;
 
 import bd.LogDAO;
@@ -10,14 +17,41 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * The Class LogsPanel.
+ */
 public class LogsPanel extends JPanel {
 
+    /**
+	 * The tabla.
+	 */
     private JTable tabla;
+    
+    /**
+	 * The modelo tabla.
+	 */
     private LogTableModel modeloTabla;
+    
+    /**
+	 * The sorter.
+	 */
     private TableRowSorter<LogTableModel> sorter;
+    
+    /**
+	 * The campo busqueda.
+	 */
     private JTextField campoBusqueda;
+    
+    /**
+	 * The usuario.
+	 */
     private Usuario usuario;
 
+    /**
+	 * Instantiates a new logs panel.
+	 *
+	 * @param usuario the usuario
+	 */
     public LogsPanel(Usuario usuario) {
         this.usuario = usuario;
         if (usuario.getRol() != Rol.GESTOR) {
@@ -29,6 +63,9 @@ public class LogsPanel extends JPanel {
         }
     }
 
+    /**
+	 * Inicializar componentes.
+	 */
     private void inicializarComponentes() {
         setLayout(new BorderLayout());
 
@@ -57,6 +94,9 @@ public class LogsPanel extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
     }
 
+    /**
+	 * Aplicar filtro.
+	 */
     private void aplicarFiltro() {
         String texto = campoBusqueda.getText().toLowerCase();
         sorter.setRowFilter(new RowFilter<>() {
@@ -70,6 +110,9 @@ public class LogsPanel extends JPanel {
         });
     }
 
+    /**
+	 * Cargar logs.
+	 */
     private void cargarLogs() {
         List<Log> logs = LogDAO.obtenerTodos();
         modeloTabla.setLogs(logs);

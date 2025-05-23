@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package vista;
 
 import modelo.Producto;
@@ -7,20 +14,64 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
+/**
+ * The Class NuevoProductoDialog.
+ */
 public class NuevoProductoDialog extends JDialog {
 
+    /**
+	 * The campo nombre.
+	 */
     private JTextField campoNombre;
+    
+    /**
+	 * The campo precio.
+	 */
     private JTextField campoPrecio;
+    
+    /**
+	 * The combo categoria.
+	 */
     private JComboBox<String> comboCategoria;
+    
+    /**
+	 * The combo talla.
+	 */
     private JComboBox<String> comboTalla;
+    
+    /**
+	 * The combo color.
+	 */
     private JComboBox<String> comboColor;
+    
+    /**
+	 * The campo stock.
+	 */
     private JTextField campoStock;
+    
+    /**
+	 * The etiqueta imagen.
+	 */
     private JLabel etiquetaImagen;
+    
+    /**
+	 * The ruta imagen relativa.
+	 */
     private String rutaImagenRelativa;
 
+    /**
+	 * The producto creado.
+	 */
     private Producto productoCreado;
+    
+    /**
+	 * The guardado.
+	 */
     private boolean guardado = false;
 
+    /**
+	 * Instantiates a new nuevo producto dialog.
+	 */
     public NuevoProductoDialog() {
         setModal(true);
         setTitle("Nuevo Producto");
@@ -72,6 +123,11 @@ public class NuevoProductoDialog extends JDialog {
         add(panelInferior, BorderLayout.SOUTH);
     }
 
+    /**
+	 * Validar campos.
+	 *
+	 * @return true, if successful
+	 */
     private boolean validarCampos() {
         if (campoNombre.getText().trim().isEmpty() ||
             campoPrecio.getText().trim().isEmpty() ||
@@ -95,6 +151,9 @@ public class NuevoProductoDialog extends JDialog {
         return true;
     }
 
+    /**
+	 * Seleccionar imagen.
+	 */
     private void seleccionarImagen() {
         JFileChooser selector = new JFileChooser("recursos/imagenes/productos");
         selector.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -113,6 +172,9 @@ public class NuevoProductoDialog extends JDialog {
         }
     }
 
+    /**
+	 * Crear producto.
+	 */
     private void crearProducto() {
         productoCreado = new Producto();
         productoCreado.setNombre(campoNombre.getText().trim());
@@ -124,10 +186,20 @@ public class NuevoProductoDialog extends JDialog {
         productoCreado.setImagen(rutaImagenRelativa);
     }
 
+    /**
+	 * Se guardo.
+	 *
+	 * @return true, if successful
+	 */
     public boolean seGuardo() {
         return guardado;
     }
 
+    /**
+	 * Gets the producto creado.
+	 *
+	 * @return the producto creado
+	 */
     public Producto getProductoCreado() {
         return productoCreado;
     }

@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package bd;
 
 import java.sql.Connection;
@@ -7,8 +14,19 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The Class LineaPedidoDAO.
+ */
 public class LineaPedidoDAO {
 
+	/**
+	 * Insertar.
+	 *
+	 * @param idPedido       the id pedido
+	 * @param idProducto     the id producto
+	 * @param cantidad       the cantidad
+	 * @param precioUnitario the precio unitario
+	 */
 	public static void insertar(int idPedido, int idProducto, int cantidad, double precioUnitario) {
 		String sql = "INSERT INTO lineapedido (id_pedido, id_producto, cantidad, precio_unitario) VALUES (?, ?, ?, ?)";
 		try (Connection con = ConexionBD.getConexion(); PreparedStatement ps = con.prepareStatement(sql)) {
@@ -22,6 +40,11 @@ public class LineaPedidoDAO {
 		}
 	}
 
+	/**
+	 * Eliminar por pedido.
+	 *
+	 * @param idPedido the id pedido
+	 */
 	public static void eliminarPorPedido(int idPedido) {
 		String sql = "DELETE FROM lineapedido WHERE id_pedido = ?";
 		try (Connection con = ConexionBD.getConexion(); PreparedStatement ps = con.prepareStatement(sql)) {
@@ -32,6 +55,12 @@ public class LineaPedidoDAO {
 		}
 	}
 
+	/**
+	 * Obtener cantidad por producto.
+	 *
+	 * @param idPedido the id pedido
+	 * @return the map
+	 */
 	public static Map<Integer, Integer> obtenerCantidadPorProducto(int idPedido) {
 		Map<Integer, Integer> resultado = new HashMap<>();
 		String sql = "SELECT id_producto, cantidad FROM lineapedido WHERE id_pedido = ?";

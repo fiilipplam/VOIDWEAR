@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package util;
 
 import java.io.BufferedWriter;
@@ -11,10 +18,23 @@ import bd.ConexionBD;
 import modelo.Log;
 import modelo.Usuario;
 
+/**
+ * The Class LogManager.
+ */
 public class LogManager {
 
+	/**
+	 * The Constant ARCHIVO_LOG.
+	 */
 	private static final String ARCHIVO_LOG = "log/eventos.txt";
 
+	/**
+	 * Registrar.
+	 *
+	 * @param usuario    the usuario
+	 * @param tipoEvento the tipo evento
+	 * @param mensaje    the mensaje
+	 */
 	// permite registrar con strings
 	public static void registrar(String usuario, String tipoEvento, String mensaje) {
 		Log log = new Log(LocalDateTime.now(), usuario, tipoEvento, mensaje);
@@ -22,6 +42,13 @@ public class LogManager {
 		guardarEnBD(log);
 	}
 
+	/**
+	 * Registrar.
+	 *
+	 * @param usuario    the usuario
+	 * @param tipoEvento the tipo evento
+	 * @param mensaje    the mensaje
+	 */
 	// permite registrar con objeto Usuario
 	public static void registrar(Usuario usuario, String tipoEvento, String mensaje) {
 		if (usuario != null) {
@@ -29,6 +56,11 @@ public class LogManager {
 		}
 	}
 
+	/**
+	 * Guardar en archivo.
+	 *
+	 * @param log the log
+	 */
 	private static void guardarEnArchivo(Log log) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARCHIVO_LOG, true))) {
 			bw.write(log.toString());
@@ -38,6 +70,11 @@ public class LogManager {
 		}
 	}
 
+	/**
+	 * Guardar en BD.
+	 *
+	 * @param log the log
+	 */
 	private static void guardarEnBD(Log log) {
 		String sql = "INSERT INTO log (fecha_hora, usuario, tipo_evento, mensaje) VALUES (?, ?, ?, ?)";
 

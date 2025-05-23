@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package vista;
 
 import javax.swing.*;
@@ -15,20 +22,51 @@ import modelo.Producto;
 import modelo.Rol;
 import java.util.List;
 
+/**
+ * The Class MainFrame.
+ */
 public class MainFrame extends JFrame {
+    
     /**
-	 * 
+	 * The Constant serialVersionUID.
 	 */
 	private static final long serialVersionUID = 4577069936890186817L;
 
+	/**
+	 * The usuario.
+	 */
 	private Usuario usuario;
 
+    /**
+	 * The panel principal.
+	 */
     private JPanel panelPrincipal;
+    
+    /**
+	 * The panel lateral.
+	 */
     private JPanel panelLateral;
+    
+    /**
+	 * The panel central.
+	 */
     private JPanel panelCentral;
+    
+    /**
+	 * The lbl usuario.
+	 */
     private JLabel lblUsuario;
+    
+    /**
+	 * The lbl rol.
+	 */
     private JLabel lblRol;
 
+    /**
+	 * Instantiates a new main frame.
+	 *
+	 * @param usuario the usuario
+	 */
     public MainFrame(Usuario usuario) {
         this.usuario = usuario;
         inicializarComponentes();
@@ -36,6 +74,9 @@ public class MainFrame extends JFrame {
         aplicarPermisos();
     }
 
+    /**
+	 * Inicializar componentes.
+	 */
     private void inicializarComponentes() {
         setTitle("VOIDWEAR");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -128,10 +169,18 @@ public class MainFrame extends JFrame {
         setContentPane(panelPrincipal);
     }
 
+    /**
+	 * Configurar ventana.
+	 */
     private void configurarVentana() {
         setVisible(true);
     }
 
+    /**
+	 * Mostrar panel.
+	 *
+	 * @param nuevoPanel the nuevo panel
+	 */
     public void mostrarPanel(JPanel nuevoPanel) {
         panelCentral.removeAll();
         panelCentral.add(nuevoPanel, BorderLayout.CENTER);
@@ -139,6 +188,9 @@ public class MainFrame extends JFrame {
         panelCentral.repaint();
     }
 
+    /**
+	 * Aplicar permisos.
+	 */
     private void aplicarPermisos() {
         // (Opcional) Puedes aplicar aquí lógica adicional por rol
     }

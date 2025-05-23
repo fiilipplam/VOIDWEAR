@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package vista;
 
 import modelo.Usuario;
@@ -14,15 +21,46 @@ import java.awt.*;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * The Class PedidosPanel.
+ */
 public class PedidosPanel extends JPanel {
 
+    /**
+	 * The usuario.
+	 */
     private Usuario usuario;
+    
+    /**
+	 * The tabla.
+	 */
     private JTable tabla;
+    
+    /**
+	 * The modelo tabla.
+	 */
     private PedidoTableModel modeloTabla;
+    
+    /**
+	 * The sorter.
+	 */
     private TableRowSorter<PedidoTableModel> sorter;
+    
+    /**
+	 * The campo filtro cliente.
+	 */
     private JTextField campoFiltroCliente;
+    
+    /**
+	 * The btn ver.
+	 */
     private JButton btnAnadir, btnEditar, btnEliminar, btnVer;
 
+    /**
+	 * Instantiates a new pedidos panel.
+	 *
+	 * @param usuario the usuario
+	 */
     public PedidosPanel(Usuario usuario) {
         this.usuario = usuario;
         inicializarComponentes();
@@ -30,6 +68,9 @@ public class PedidosPanel extends JPanel {
         aplicarPermisos();
     }
 
+    /**
+	 * Inicializar componentes.
+	 */
     private void inicializarComponentes() {
         setLayout(new BorderLayout());
 
@@ -75,6 +116,9 @@ public class PedidosPanel extends JPanel {
     }
 
 
+    /**
+	 * Aplicar filtro.
+	 */
     private void aplicarFiltro() {
         String texto = campoFiltroCliente.getText().toLowerCase();
         sorter.setRowFilter(new RowFilter<>() {
@@ -85,6 +129,9 @@ public class PedidosPanel extends JPanel {
         });
     }
 
+    /**
+	 * Cargar pedidos.
+	 */
     private void cargarPedidos() {
         if (usuario.getRol() == Rol.CLIENTE && Sesion.clienteActual != null) {
             modeloTabla.setPedidos(PedidoDAO.obtenerPorCliente(Sesion.clienteActual.getIdCliente()));
@@ -93,6 +140,9 @@ public class PedidosPanel extends JPanel {
         }
     }
 
+    /**
+	 * Aplicar permisos.
+	 */
     private void aplicarPermisos() {
         if (usuario.getRol() == Rol.CLIENTE) {
             btnAnadir.setEnabled(true);
@@ -101,12 +151,18 @@ public class PedidosPanel extends JPanel {
         }
     }
 
+    /**
+	 * Anadir pedido.
+	 */
     private void anadirPedido() {
         DetallePedidoDialog dialogo = new DetallePedidoDialog(null, usuario);
         dialogo.setVisible(true);
         if (dialogo.isGuardado()) cargarPedidos();
     }
 
+    /**
+	 * Editar pedido.
+	 */
     private void editarPedido() {
         int fila = tabla.getSelectedRow();
         if (fila >= 0) {
@@ -125,6 +181,9 @@ public class PedidosPanel extends JPanel {
         }
     }
 
+    /**
+	 * Eliminar pedido.
+	 */
     private void eliminarPedido() {
         int fila = tabla.getSelectedRow();
         if (fila >= 0) {
@@ -145,6 +204,9 @@ public class PedidosPanel extends JPanel {
         }
     }
 
+    /**
+	 * Ver detalle.
+	 */
     private void verDetalle() {
         int fila = tabla.getSelectedRow();
         if (fila >= 0) {

@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package bd;
 
 import java.sql.Connection;
@@ -9,8 +16,16 @@ import java.util.List;
 
 import modelo.Log;
 
+/**
+ * The Class LogDAO.
+ */
 public class LogDAO {
 
+	/**
+	 * Obtener todos.
+	 *
+	 * @return the list
+	 */
 	public static List<Log> obtenerTodos() {
 		List<Log> lista = new ArrayList<>();
 		String sql = "SELECT * FROM log ORDER BY fecha_hora DESC";
@@ -32,6 +47,11 @@ public class LogDAO {
 		return lista;
 	}
 
+	/**
+	 * Insertar.
+	 *
+	 * @param log the log
+	 */
 	public static void insertar(Log log) {
 		String sql = "INSERT INTO log (fecha_hora, usuario, tipo_evento, mensaje) VALUES (?, ?, ?, ?)";
 

@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package bd;
 
 import java.sql.Connection;
@@ -16,11 +23,26 @@ import modelo.Cliente;
 import modelo.Rol;
 import modelo.Usuario;
 
+/**
+ * The Class UsuarioDAO.
+ */
 public class UsuarioDAO {
 
+	/**
+	 * The Constant DB_PATH.
+	 */
 	private static final String DB_PATH = "recursos/config/usuarios.odb";
+	
+	/**
+	 * The Constant emf.
+	 */
 	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory(DB_PATH);
 
+	/**
+	 * Obtener todos.
+	 *
+	 * @return the list
+	 */
 	public static List<Usuario> obtenerTodos() {
 		EntityManager em = emf.createEntityManager();
 		List<Usuario> usuarios = em.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList();
@@ -28,6 +50,11 @@ public class UsuarioDAO {
 		return usuarios;
 	}
 
+	/**
+	 * Insertar.
+	 *
+	 * @param usuario the usuario
+	 */
 	public static void insertar(Usuario usuario) {
 	    EntityManager em = emf.createEntityManager();
 	    EntityTransaction tx = em.getTransaction();
@@ -58,6 +85,12 @@ public class UsuarioDAO {
 	}
 
 	
+	/**
+	 * Insertar en SQL.
+	 *
+	 * @param usuario the usuario
+	 * @return the int
+	 */
 	public static int insertarEnSQL(Usuario usuario) {
 	    int idUsuarioSQL = -1;
 	    String sql = "INSERT INTO usuario (nombre, correo, rol) VALUES (?, ?, ?)";
@@ -83,6 +116,11 @@ public class UsuarioDAO {
 	}
 
 
+	/**
+	 * Actualizar.
+	 *
+	 * @param usuario the usuario
+	 */
 	public static void actualizar(Usuario usuario) {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -99,6 +137,11 @@ public class UsuarioDAO {
 		}
 	}
 
+	/**
+	 * Eliminar.
+	 *
+	 * @param usuario the usuario
+	 */
 	public static void eliminar(Usuario usuario) {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();

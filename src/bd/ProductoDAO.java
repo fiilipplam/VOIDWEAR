@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package bd;
 
 import java.sql.Connection;
@@ -9,14 +16,30 @@ import java.util.List;
 
 import modelo.Producto;
 
+/**
+ * The Class ProductoDAO.
+ */
 public class ProductoDAO {
 
+	/**
+	 * The conexion.
+	 */
 	private Connection conexion;
 
+	/**
+	 * Instantiates a new producto DAO.
+	 *
+	 * @param conexion the conexion
+	 */
 	public ProductoDAO(Connection conexion) {
 		this.setConexion(conexion);
 	}
 
+	/**
+	 * Insertar producto.
+	 *
+	 * @param producto the producto
+	 */
 	public void insertarProducto(Producto producto) {
 		String sql = "INSERT INTO producto (nombre, precio, categoria, talla, color, stock, imagen) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
@@ -36,6 +59,12 @@ public class ProductoDAO {
 		}
 	}
 
+	/**
+	 * Obtener por id.
+	 *
+	 * @param idProducto the id producto
+	 * @return the producto
+	 */
 	public static Producto obtenerPorId(int idProducto) {
 		String sql = "SELECT * FROM producto WHERE id_producto = ?";
 		try (Connection con = ConexionBD.getConexion(); PreparedStatement ps = con.prepareStatement(sql)) {
@@ -55,6 +84,11 @@ public class ProductoDAO {
 		return null;
 	}
 
+	/**
+	 * Actualizar producto.
+	 *
+	 * @param producto the producto
+	 */
 	public void actualizarProducto(Producto producto) {
 		String sql = "UPDATE producto SET nombre=?, precio=?, categoria=?, talla=?, color=?, stock=?, imagen=? WHERE id_producto=?";
 
@@ -75,6 +109,11 @@ public class ProductoDAO {
 		}
 	}
 
+	/**
+	 * Eliminar producto.
+	 *
+	 * @param idProducto the id producto
+	 */
 	public void eliminarProducto(int idProducto) {
 		String sql = "DELETE FROM producto WHERE id_producto=?";
 		try (PreparedStatement ps = conexion.prepareStatement(sql)) {
@@ -85,6 +124,11 @@ public class ProductoDAO {
 		}
 	}
 
+	/**
+	 * Listar productos.
+	 *
+	 * @return the list
+	 */
 	public List<Producto> listarProductos() {
 		List<Producto> productos = new ArrayList<>();
 		String sql = "SELECT * FROM producto";
@@ -111,6 +155,11 @@ public class ProductoDAO {
 		return productos;
 	}
 
+	/**
+	 * Obtener todos.
+	 *
+	 * @return the list
+	 */
 	public static List<Producto> obtenerTodos() {
 		List<Producto> lista = new ArrayList<>();
 		String sql = "SELECT * FROM producto";
@@ -129,10 +178,20 @@ public class ProductoDAO {
 		return lista;
 	}
 
+	/**
+	 * Gets the conexion.
+	 *
+	 * @return the conexion
+	 */
 	public Connection getConexion() {
 		return conexion;
 	}
 
+	/**
+	 * Sets the conexion.
+	 *
+	 * @param conexion the new conexion
+	 */
 	public void setConexion(Connection conexion) {
 		this.conexion = conexion;
 	}

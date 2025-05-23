@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package util;
 
 import java.awt.Image;
@@ -7,8 +14,19 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+/**
+ * The Class ImageUtils.
+ */
 public class ImageUtils {
 
+	/**
+	 * Cargar miniatura.
+	 *
+	 * @param ruta  the ruta
+	 * @param ancho the ancho
+	 * @param alto  the alto
+	 * @return the image icon
+	 */
 	public static ImageIcon cargarMiniatura(String ruta, int ancho, int alto) {
 		try {
 			BufferedImage imagenOriginal = ImageIO.read(new File(ruta));

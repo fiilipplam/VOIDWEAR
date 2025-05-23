@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package vista;
 
 import bd.ConexionBD;
@@ -11,18 +18,62 @@ import java.awt.*;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * The Class ProductoPanel.
+ */
 public class ProductoPanel extends JPanel {
+    
+    /**
+	 * The tabla.
+	 */
     private JTable tabla;
+    
+    /**
+	 * The table model.
+	 */
     private ProductoTableModel tableModel;
+    
+    /**
+	 * The campo buscar.
+	 */
     private JTextField campoBuscar;
+    
+    /**
+	 * The combo ordenar.
+	 */
     private JComboBox<String> comboOrdenar;
+    
+    /**
+	 * The sorter.
+	 */
     private TableRowSorter<ProductoTableModel> sorter;
 
+    /**
+	 * The boton anadir.
+	 */
     private JButton botonAnadir;
+    
+    /**
+	 * The boton editar.
+	 */
     private JButton botonEditar;
+    
+    /**
+	 * The boton eliminar.
+	 */
     private JButton botonEliminar;
+    
+    /**
+	 * The boton mostrar detalles.
+	 */
     private JButton botonMostrarDetalles;
 
+    /**
+	 * Instantiates a new producto panel.
+	 *
+	 * @param productos  the productos
+	 * @param rolUsuario the rol usuario
+	 */
     public ProductoPanel(List<Producto> productos, String rolUsuario) {
         setLayout(new BorderLayout());
 

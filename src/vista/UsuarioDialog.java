@@ -1,3 +1,10 @@
+/**
+ * ==================================================
+ * Proyecto: LPB Basketball
+ * 
+ * @author ${author}
+ * ==================================================
+ */
 package vista;
 
 import modelo.Rol;
@@ -8,22 +15,58 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * The Class UsuarioDialog.
+ */
 public class UsuarioDialog extends JDialog {
 
+    /**
+	 * The campo nombre.
+	 */
     private JTextField campoNombre;
+    
+    /**
+	 * The campo correo.
+	 */
     private JTextField campoCorreo;
+    
+    /**
+	 * The campo contraseña.
+	 */
     private JPasswordField campoContraseña;
+    
+    /**
+	 * The combo rol.
+	 */
     private JComboBox<Rol> comboRol;
 
+    /**
+	 * The guardado.
+	 */
     private boolean guardado = false;
+    
+    /**
+	 * The original.
+	 */
     private Usuario original;
 
+    /**
+	 * Instantiates a new usuario dialog.
+	 *
+	 * @param parent  the parent
+	 * @param usuario the usuario
+	 */
     public UsuarioDialog(Window parent, Usuario usuario) {
         super(parent, "Usuario", ModalityType.APPLICATION_MODAL);
         this.original = usuario;
         inicializar(usuario);
     }
 
+    /**
+	 * Inicializar.
+	 *
+	 * @param usuario the usuario
+	 */
     private void inicializar(Usuario usuario) {
         setLayout(new BorderLayout());
 
@@ -73,6 +116,9 @@ public class UsuarioDialog extends JDialog {
         setLocationRelativeTo(getParent());
     }
 
+    /**
+	 * Guardar.
+	 */
     private void guardar() {
         String nombre = campoNombre.getText().trim();
         String correo = campoCorreo.getText().trim();
@@ -112,6 +158,11 @@ public class UsuarioDialog extends JDialog {
         dispose();
     }
 
+    /**
+	 * Checks if is guardado.
+	 *
+	 * @return true, if is guardado
+	 */
     public boolean isGuardado() {
         return guardado;
     }
