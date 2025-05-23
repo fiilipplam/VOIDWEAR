@@ -71,9 +71,21 @@
       <nombre>Aitor</nombre>
       <rol>GESTOR</rol>
     </usuario>
+    <usuario correo="cliente@voidwear.com">
+      <nombre>cliente</nombre>
+      <rol>CLIENTE</rol>
+    </usuario>
+    <usuario correo="empleado@voidwear.com">
+      <nombre>empleado</nombre>
+      <rol>EMPLEADO</rol>
+    </usuario>
     <usuario correo="felipe@voidwear.com">
       <nombre>felipe</nombre>
       <rol>CLIENTE</rol>
+    </usuario>
+    <usuario correo="gestor@voidwear.com">
+      <nombre>gestor</nombre>
+      <rol>GESTOR</rol>
     </usuario>
     <usuario correo="lara@voidwear.com">
       <nombre>lara</nombre>
@@ -89,6 +101,11 @@
       <direccion>Sin definir</direccion>
       <telefono>000000000</telefono>
       <id_usuario>1</id_usuario>
+    </cliente>
+    <cliente id="2">
+      <direccion>Sin definir</direccion>
+      <telefono>000000000</telefono>
+      <id_usuario>2</id_usuario>
     </cliente>
   </clientes>
   <pedidos>
