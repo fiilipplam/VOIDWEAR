@@ -32,19 +32,30 @@ public class PedidoDAO {
 
 	public static List<Pedido> obtenerPorCliente(int idCliente) {
 		List<Pedido> lista = new ArrayList<>();
-		String sql = "SELECT * FROM pedido WHERE id_cliente = ?";
-		try (Connection con = ConexionBD.getConexion(); PreparedStatement ps = con.prepareStatement(sql)) {
+		String sql = "SELECT id_pedido, fecha, id_cliente FROM pedido WHERE id_cliente = ?";
+
+		try (Connection con = ConexionBD.getConexion();
+		     PreparedStatement ps = con.prepareStatement(sql)) {
+
 			ps.setInt(1, idCliente);
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				lista.add(
-						new Pedido(rs.getInt("id_pedido"), rs.getDate("fecha").toLocalDate(), rs.getInt("id_cliente")));
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					int idPedido = rs.getInt("id_pedido");
+					LocalDate fecha = rs.getDate("fecha").toLocalDate();
+					int clienteId = rs.getInt("id_cliente");
+
+					Pedido pedido = new Pedido(idPedido, fecha, clienteId);
+					lista.add(pedido);
+				}
 			}
+
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.err.println("Error al obtener pedidos por cliente: " + e.getMessage());
 		}
+
 		return lista;
 	}
+
 
 	public static int insertar(LocalDate fecha, int idCliente) {
 		String sql = "INSERT INTO pedido (fecha, id_cliente) VALUES (?, ?)";

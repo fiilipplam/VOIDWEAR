@@ -13,6 +13,15 @@ public class PedidoTableModel extends AbstractTableModel {
     private final String[] columnas = {"ID", "Fecha", "Cliente", "Total (€)"};
     private List<Pedido> pedidos = new ArrayList<>();
 
+    // Constructor por defecto para evitar null
+    public PedidoTableModel() {
+        this.pedidos = new ArrayList<>();
+    }
+
+    public PedidoTableModel(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+
     public void setPedidos(List<Pedido> lista) {
         this.pedidos = lista;
         fireTableDataChanged();

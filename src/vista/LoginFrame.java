@@ -5,7 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import modelo.Usuario;
+import modelo.Cliente;
 import modelo.Rol;
+import modelo.Sesion;
+import bd.ClienteDAO;
 import bd.UsuarioDAO;
 
 public class LoginFrame extends JFrame {
@@ -57,6 +60,22 @@ public class LoginFrame extends JFrame {
         List<Usuario> usuarios = UsuarioDAO.obtenerTodos();
         for (Usuario u : usuarios) {
             if (u.getCorreo().equalsIgnoreCase(correo) && u.getContrasena().equals(contrasena)) {
+
+                // Guardar sesión del usuario
+                Sesion.usuarioActual = u;
+
+                // Si es cliente, buscar su cliente en SQL
+                if (Sesion.esCliente()) {
+                    Cliente cliente = ClienteDAO.obtenerPorUsuario(u.getCorreo());
+                    if (cliente == null) {
+                        JOptionPane.showMessageDialog(this,
+                            "No se ha encontrado el cliente asociado a este usuario.\nNo se puede continuar.",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    Sesion.clienteActual = cliente;
+                }
+
                 JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.");
                 dispose();
                 new MainFrame(u).setVisible(true);
@@ -66,6 +85,7 @@ public class LoginFrame extends JFrame {
 
         JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.");
     }
+
 
     private void accederComoInvitado() {
         Usuario invitado = new Usuario("Invitado", "invitado@voidwear.com", "", Rol.CLIENTE);

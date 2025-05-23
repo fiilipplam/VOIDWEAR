@@ -4,6 +4,7 @@ import modelo.Usuario;
 import modelo.Rol;
 import modelo.Pedido;
 import modelo.Cliente;
+import modelo.Sesion;
 import bd.PedidoDAO;
 import bd.ClienteDAO;
 
@@ -42,14 +43,14 @@ public class PedidosPanel extends JPanel {
             public void removeUpdate(javax.swing.event.DocumentEvent e) { aplicarFiltro(); }
             public void changedUpdate(javax.swing.event.DocumentEvent e) { aplicarFiltro(); }
         });
-
         add(panelFiltros, BorderLayout.NORTH);
 
         // Tabla
-        modeloTabla = new PedidoTableModel();
+        modeloTabla = new PedidoTableModel();              // ✅ Crear modelo vacío
+        cargarPedidos();                                   // ✅ Asignar datos ANTES del sorter
         tabla = new JTable(modeloTabla);
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        sorter = new TableRowSorter<>(modeloTabla);
+        sorter = new TableRowSorter<>(modeloTabla);        // ✅ Crear sorter DESPUÉS de tener datos
         tabla.setRowSorter(sorter);
         add(new JScrollPane(tabla), BorderLayout.CENTER);
 
@@ -66,11 +67,13 @@ public class PedidosPanel extends JPanel {
         panelBotones.add(btnVer);
         add(panelBotones, BorderLayout.SOUTH);
 
+        // Acciones
         btnAnadir.addActionListener(e -> anadirPedido());
         btnEditar.addActionListener(e -> editarPedido());
         btnEliminar.addActionListener(e -> eliminarPedido());
         btnVer.addActionListener(e -> verDetalle());
     }
+
 
     private void aplicarFiltro() {
         String texto = campoFiltroCliente.getText().toLowerCase();
@@ -83,9 +86,8 @@ public class PedidosPanel extends JPanel {
     }
 
     private void cargarPedidos() {
-        if (usuario.getRol() == Rol.CLIENTE) {
-            int idCliente = ClienteDAO.obtenerIdPorUsuario(usuario.getCorreo());
-            modeloTabla.setPedidos(PedidoDAO.obtenerPorCliente(idCliente));
+        if (usuario.getRol() == Rol.CLIENTE && Sesion.clienteActual != null) {
+            modeloTabla.setPedidos(PedidoDAO.obtenerPorCliente(Sesion.clienteActual.getIdCliente()));
         } else {
             modeloTabla.setPedidos(PedidoDAO.obtenerTodos());
         }
@@ -110,10 +112,10 @@ public class PedidosPanel extends JPanel {
         if (fila >= 0) {
             Pedido pedido = modeloTabla.getPedidoAt(sorter.convertRowIndexToModel(fila));
             boolean esHoy = pedido.getFecha().equals(LocalDate.now());
-            boolean clientePropio = usuario.getRol() == Rol.CLIENTE &&
-                    ClienteDAO.obtenerIdPorUsuario(usuario.getCorreo()) == pedido.getIdCliente();
+            boolean clientePropio = usuario.getRol() != Rol.CLIENTE ||
+                    (Sesion.clienteActual != null && Sesion.clienteActual.getIdCliente() == pedido.getIdCliente());
 
-            if ((usuario.getRol() != Rol.CLIENTE || clientePropio) && esHoy) {
+            if (clientePropio && esHoy) {
                 DetallePedidoDialog dialogo = new DetallePedidoDialog(pedido, usuario);
                 dialogo.setVisible(true);
                 if (dialogo.isGuardado()) cargarPedidos();
@@ -128,10 +130,10 @@ public class PedidosPanel extends JPanel {
         if (fila >= 0) {
             Pedido pedido = modeloTabla.getPedidoAt(sorter.convertRowIndexToModel(fila));
             boolean esHoy = pedido.getFecha().equals(LocalDate.now());
-            boolean clientePropio = usuario.getRol() == Rol.CLIENTE &&
-                    ClienteDAO.obtenerIdPorUsuario(usuario.getCorreo()) == pedido.getIdCliente();
+            boolean clientePropio = usuario.getRol() != Rol.CLIENTE ||
+                    (Sesion.clienteActual != null && Sesion.clienteActual.getIdCliente() == pedido.getIdCliente());
 
-            if ((usuario.getRol() != Rol.CLIENTE || clientePropio) && esHoy) {
+            if (clientePropio && esHoy) {
                 int confirm = JOptionPane.showConfirmDialog(this, "¿Eliminar pedido?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
                     PedidoDAO.eliminar(pedido.getIdPedido());

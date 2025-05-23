@@ -27,6 +27,7 @@ import modelo.Pedido;
 import modelo.Producto;
 import modelo.Rol;
 import modelo.Usuario;
+import modelo.Sesion;
 
 public class DetallePedidoDialog extends JDialog {
 
@@ -59,6 +60,12 @@ public class DetallePedidoDialog extends JDialog {
 		super((Frame) null, true);
 		this.usuario = usuario;
 		this.pedido = pedido;
+		
+		if (Sesion.esCliente()) {
+			if (comboCliente != null) comboCliente.setVisible(false);
+			if (panelCliente != null) panelCliente.setVisible(false);
+		}
+		
 		setTitle(pedido == null ? "Nuevo Pedido" : "Detalle del Pedido");
 		setSize(500, 600);
 		setLocationRelativeTo(null);
@@ -155,10 +162,16 @@ public class DetallePedidoDialog extends JDialog {
 	}
 
 	private void guardarPedido() {
-		Cliente cliente = (Cliente) comboCliente.getSelectedItem();
-		if (cliente == null) {
-			JOptionPane.showMessageDialog(this, "Selecciona un cliente.");
-			return;
+		Cliente cliente;
+
+		if (Sesion.esCliente()) {
+			cliente = Sesion.clienteActual;
+		} else {
+			cliente = (Cliente) comboCliente.getSelectedItem();
+			if (cliente == null) {
+				JOptionPane.showMessageDialog(this, "Selecciona un cliente.");
+				return;
+			}
 		}
 
 		Map<Producto, Integer> seleccionados = new HashMap<>();
@@ -177,21 +190,20 @@ public class DetallePedidoDialog extends JDialog {
 		if (pedido == null) {
 			int idPedido = PedidoDAO.insertar(LocalDate.now(), cliente.getIdCliente());
 			for (Map.Entry<Producto, Integer> entry : seleccionados.entrySet()) {
-				LineaPedidoDAO.insertar(idPedido, entry.getKey().getIdProducto(), entry.getValue(),
-						entry.getKey().getPrecio());
+				LineaPedidoDAO.insertar(idPedido, entry.getKey().getIdProducto(), entry.getValue(), entry.getKey().getPrecio());
 			}
 		} else {
 			PedidoDAO.actualizar(pedido.getIdPedido(), cliente.getIdCliente());
 			LineaPedidoDAO.eliminarPorPedido(pedido.getIdPedido());
 			for (Map.Entry<Producto, Integer> entry : seleccionados.entrySet()) {
-				LineaPedidoDAO.insertar(pedido.getIdPedido(), entry.getKey().getIdProducto(), entry.getValue(),
-						entry.getKey().getPrecio());
+				LineaPedidoDAO.insertar(pedido.getIdPedido(), entry.getKey().getIdProducto(), entry.getValue(), entry.getKey().getPrecio());
 			}
 		}
 
 		guardado = true;
 		dispose();
 	}
+
 
 	public boolean isGuardado() {
 		return guardado;

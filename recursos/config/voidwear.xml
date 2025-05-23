@@ -2,154 +2,78 @@
 <voidwear xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="voidwear.xsd">
   <productos>
     <producto id="1">
-      <nombre>Producto1</nombre>
-      <precio>40.03</precio>
+      <nombre>Camiseta Logo</nombre>
+      <precio>49.99</precio>
       <categoria>Camisetas</categoria>
       <talla>XL</talla>
-      <color>Rojo</color>
+      <color>Negro</color>
       <stock>31</stock>
     </producto>
-    <producto id="2">
-      <nombre>Producto2</nombre>
-      <precio>21.52</precio>
-      <categoria>Pantalones</categoria>
-      <talla>S</talla>
-      <color>Gris</color>
-      <stock>41</stock>
-    </producto>
     <producto id="3">
-      <nombre>Producto3</nombre>
-      <precio>70.61</precio>
+      <nombre>Camiseta Logo</nombre>
+      <precio>49.99</precio>
       <categoria>Camisetas</categoria>
       <talla>S</talla>
-      <color>Blanco</color>
-      <stock>44</stock>
+      <color>Negro</color>
+      <stock>12</stock>
     </producto>
     <producto id="4">
-      <nombre>Producto4</nombre>
-      <precio>59.56</precio>
-      <categoria>Zapatillas</categoria>
+      <nombre>Camiseta Logo</nombre>
+      <precio>49.99</precio>
+      <categoria>Camisetas</categoria>
       <talla>M</talla>
       <color>Negro</color>
-      <stock>38</stock>
+      <stock>2</stock>
     </producto>
     <producto id="5">
-      <nombre>Producto5</nombre>
-      <precio>73.68</precio>
+      <nombre>Calcetines</nombre>
+      <precio>31.99</precio>
       <categoria>Accesorios</categoria>
       <talla>L</talla>
-      <color>Negro</color>
+      <color>Blanco</color>
       <stock>15</stock>
     </producto>
     <producto id="6">
-      <nombre>Producto6</nombre>
-      <precio>54.81</precio>
-      <categoria>Sudaderas</categoria>
-      <talla>XL</talla>
-      <color>Rojo</color>
-      <stock>31</stock>
+      <nombre>Gorra Logo</nombre>
+      <precio>54.99</precio>
+      <categoria>Accesorios</categoria>
+      <talla>L</talla>
+      <color>Negro</color>
+      <stock>45</stock>
     </producto>
     <producto id="7">
-      <nombre>Producto7</nombre>
-      <precio>83.03</precio>
-      <categoria>Pantalones</categoria>
+      <nombre>Pulsera Acero</nombre>
+      <precio>2000.99</precio>
+      <categoria>Accesorios</categoria>
       <talla>M</talla>
       <color>Gris</color>
-      <stock>25</stock>
-    </producto>
-    <producto id="8">
-      <nombre>Producto8</nombre>
-      <precio>92.66</precio>
-      <categoria>Camisetas</categoria>
-      <talla>M</talla>
-      <color>Rojo</color>
-      <stock>16</stock>
-    </producto>
-    <producto id="9">
-      <nombre>Producto9</nombre>
-      <precio>98.12</precio>
-      <categoria>Zapatillas</categoria>
-      <talla>L</talla>
-      <color>Verde</color>
-      <stock>31</stock>
-    </producto>
-    <producto id="10">
-      <nombre>Producto10</nombre>
-      <precio>75.14</precio>
-      <categoria>Sudaderas</categoria>
-      <talla>L</talla>
-      <color>Gris</color>
-      <stock>43</stock>
-    </producto>
-    <producto id="11">
-      <nombre>Producto11</nombre>
-      <precio>61.88</precio>
-      <categoria>Pantalones</categoria>
-      <talla>S</talla>
-      <color>Blanco</color>
-      <stock>29</stock>
-    </producto>
-    <producto id="12">
-      <nombre>Producto12</nombre>
-      <precio>42.89</precio>
-      <categoria>Pantalones</categoria>
-      <talla>M</talla>
-      <color>Rojo</color>
-      <stock>15</stock>
-    </producto>
-    <producto id="13">
-      <nombre>Producto13</nombre>
-      <precio>45.46</precio>
-      <categoria>Sudaderas</categoria>
-      <talla>XL</talla>
-      <color>Gris</color>
-      <stock>8</stock>
-    </producto>
-    <producto id="14">
-      <nombre>Producto14</nombre>
-      <precio>88.75</precio>
-      <categoria>Sudaderas</categoria>
-      <talla>M</talla>
-      <color>Verde</color>
-      <stock>33</stock>
-    </producto>
-    <producto id="15">
-      <nombre>Producto15</nombre>
-      <precio>14.61</precio>
-      <categoria>Sudaderas</categoria>
-      <talla>S</talla>
-      <color>Gris</color>
-      <stock>35</stock>
-    </producto>
-    <producto id="16">
-      <nombre>Camiseta VOIDWEAR</nombre>
-      <precio>999.99</precio>
-      <categoria>Camisetas</categoria>
-      <talla>L</talla>
-      <color>Negro</color>
-      <stock>99</stock>
+      <stock>10</stock>
     </producto>
     <producto id="17">
-      <nombre>Camiseta VOIDWEAR</nombre>
-      <precio>39.95</precio>
-      <categoria>Camisetas</categoria>
-      <talla>L</talla>
+      <nombre>Chandal Parte inferior Logo</nombre>
+      <precio>89.99</precio>
+      <categoria>Pantalones</categoria>
+      <talla>M</talla>
       <color>Negro</color>
-      <stock>25</stock>
+      <stock>3</stock>
     </producto>
     <producto id="18">
-      <nombre>pantalones</nombre>
-      <precio>1111.01</precio>
+      <nombre>Chandal Parte inferior Logo</nombre>
+      <precio>89.99</precio>
       <categoria>Pantalones</categoria>
       <talla>L</talla>
       <color>Negro</color>
-      <stock>111111111</stock>
+      <stock>22</stock>
     </producto>
   </productos>
   <usuarios>
     <usuario correo="aitor@voidwear.com">
       <nombre>Aitor</nombre>
       <rol>GESTOR</rol>
+    </usuario>
+    <usuario correo="felipe@voidwear.com">
+      <nombre>felipe</nombre>
+      <rol>CLIENTE</rol>
     </usuario>
     <usuario correo="lara@voidwear.com">
       <nombre>lara</nombre>
@@ -159,754 +83,21 @@
       <nombre>Lucía</nombre>
       <rol>EMPLEADO</rol>
     </usuario>
-    <usuario correo="raul@voidwear.com">
-      <nombre>Raúl</nombre>
-      <rol>CLIENTE</rol>
-    </usuario>
   </usuarios>
   <clientes>
     <cliente id="1">
-      <direccion>Calle Falsa 1, Ciudad</direccion>
-      <telefono>679490639</telefono>
-      <id_usuario>3</id_usuario>
-    </cliente>
-    <cliente id="2">
-      <direccion>Calle Falsa 2, Ciudad</direccion>
-      <telefono>636436524</telefono>
-      <id_usuario>4</id_usuario>
-    </cliente>
-    <cliente id="3">
-      <direccion>Calle Falsa 3, Ciudad</direccion>
-      <telefono>624993753</telefono>
-      <id_usuario>5</id_usuario>
-    </cliente>
-    <cliente id="4">
-      <direccion>Calle Falsa 4, Ciudad</direccion>
-      <telefono>651195376</telefono>
-      <id_usuario>6</id_usuario>
-    </cliente>
-    <cliente id="5">
-      <direccion>Calle Falsa 5, Ciudad</direccion>
-      <telefono>624191523</telefono>
-      <id_usuario>7</id_usuario>
-    </cliente>
-    <cliente id="6">
-      <direccion>Calle Falsa 6, Ciudad</direccion>
-      <telefono>606021596</telefono>
-      <id_usuario>8</id_usuario>
-    </cliente>
-    <cliente id="7">
-      <direccion>Calle Falsa 7, Ciudad</direccion>
-      <telefono>621349927</telefono>
-      <id_usuario>9</id_usuario>
-    </cliente>
-    <cliente id="8">
-      <direccion>Calle Falsa 8, Ciudad</direccion>
-      <telefono>662447540</telefono>
-      <id_usuario>10</id_usuario>
-    </cliente>
-    <cliente id="9">
-      <direccion>Calle Falsa 9, Ciudad</direccion>
-      <telefono>649173065</telefono>
-      <id_usuario>11</id_usuario>
-    </cliente>
-    <cliente id="10">
-      <direccion>Calle Falsa 10, Ciudad</direccion>
-      <telefono>627757615</telefono>
-      <id_usuario>12</id_usuario>
-    </cliente>
-    <cliente id="11">
-      <direccion>Calle Falsa 11, Ciudad</direccion>
-      <telefono>676489444</telefono>
-      <id_usuario>13</id_usuario>
-    </cliente>
-    <cliente id="12">
-      <direccion>Calle Falsa 12, Ciudad</direccion>
-      <telefono>659186399</telefono>
-      <id_usuario>14</id_usuario>
-    </cliente>
-    <cliente id="13">
-      <direccion>Calle Falsa 13, Ciudad</direccion>
-      <telefono>652276679</telefono>
-      <id_usuario>15</id_usuario>
-    </cliente>
-    <cliente id="14">
-      <direccion>Calle Falsa 14, Ciudad</direccion>
-      <telefono>649064881</telefono>
-      <id_usuario>16</id_usuario>
-    </cliente>
-    <cliente id="15">
-      <direccion>Calle Falsa 15, Ciudad</direccion>
-      <telefono>619878066</telefono>
-      <id_usuario>17</id_usuario>
-    </cliente>
-    <cliente id="16">
-      <direccion>Calle Falsa 16, Ciudad</direccion>
-      <telefono>635087703</telefono>
-      <id_usuario>18</id_usuario>
-    </cliente>
-    <cliente id="17">
-      <direccion>Calle Falsa 17, Ciudad</direccion>
-      <telefono>640421269</telefono>
-      <id_usuario>19</id_usuario>
-    </cliente>
-    <cliente id="18">
-      <direccion>Calle Falsa 18, Ciudad</direccion>
-      <telefono>605547901</telefono>
-      <id_usuario>20</id_usuario>
-    </cliente>
-    <cliente id="19">
-      <direccion>Calle Falsa 19, Ciudad</direccion>
-      <telefono>654749317</telefono>
-      <id_usuario>21</id_usuario>
-    </cliente>
-    <cliente id="20">
-      <direccion>Calle Falsa 20, Ciudad</direccion>
-      <telefono>644373150</telefono>
-      <id_usuario>22</id_usuario>
-    </cliente>
-    <cliente id="21">
-      <direccion>Calle Falsa 21, Ciudad</direccion>
-      <telefono>607823869</telefono>
-      <id_usuario>23</id_usuario>
-    </cliente>
-    <cliente id="22">
-      <direccion>Calle Falsa 22, Ciudad</direccion>
-      <telefono>622567763</telefono>
-      <id_usuario>24</id_usuario>
-    </cliente>
-    <cliente id="23">
-      <direccion>Calle Falsa 23, Ciudad</direccion>
-      <telefono>698127272</telefono>
-      <id_usuario>25</id_usuario>
-    </cliente>
-    <cliente id="24">
-      <direccion>Calle Falsa 24, Ciudad</direccion>
-      <telefono>629683817</telefono>
-      <id_usuario>26</id_usuario>
-    </cliente>
-    <cliente id="25">
-      <direccion>Calle Falsa 25, Ciudad</direccion>
-      <telefono>664728822</telefono>
-      <id_usuario>27</id_usuario>
-    </cliente>
-    <cliente id="26">
-      <direccion>Calle Falsa 26, Ciudad</direccion>
-      <telefono>671211477</telefono>
-      <id_usuario>28</id_usuario>
-    </cliente>
-    <cliente id="27">
-      <direccion>Calle Falsa 27, Ciudad</direccion>
-      <telefono>616083076</telefono>
-      <id_usuario>29</id_usuario>
-    </cliente>
-    <cliente id="28">
-      <direccion>Calle Falsa 28, Ciudad</direccion>
-      <telefono>670630652</telefono>
-      <id_usuario>30</id_usuario>
-    </cliente>
-    <cliente id="29">
-      <direccion>Calle Falsa 29, Ciudad</direccion>
-      <telefono>687332915</telefono>
-      <id_usuario>31</id_usuario>
-    </cliente>
-    <cliente id="30">
-      <direccion>Calle Falsa 30, Ciudad</direccion>
-      <telefono>684065895</telefono>
-      <id_usuario>32</id_usuario>
-    </cliente>
-    <cliente id="31">
-      <direccion>Calle Falsa 31, Ciudad</direccion>
-      <telefono>629517549</telefono>
-      <id_usuario>33</id_usuario>
-    </cliente>
-    <cliente id="32">
-      <direccion>Calle Falsa 32, Ciudad</direccion>
-      <telefono>636684917</telefono>
-      <id_usuario>34</id_usuario>
-    </cliente>
-    <cliente id="33">
-      <direccion>Calle Falsa 33, Ciudad</direccion>
-      <telefono>616601034</telefono>
-      <id_usuario>35</id_usuario>
-    </cliente>
-    <cliente id="34">
-      <direccion>Calle Falsa 34, Ciudad</direccion>
-      <telefono>628083127</telefono>
-      <id_usuario>36</id_usuario>
-    </cliente>
-    <cliente id="35">
-      <direccion>Calle Falsa 35, Ciudad</direccion>
-      <telefono>629551693</telefono>
-      <id_usuario>37</id_usuario>
-    </cliente>
-    <cliente id="36">
-      <direccion>Calle Falsa 36, Ciudad</direccion>
-      <telefono>689191674</telefono>
-      <id_usuario>38</id_usuario>
-    </cliente>
-    <cliente id="37">
-      <direccion>Calle Falsa 37, Ciudad</direccion>
-      <telefono>654416079</telefono>
-      <id_usuario>39</id_usuario>
-    </cliente>
-    <cliente id="38">
-      <direccion>Calle Falsa 38, Ciudad</direccion>
-      <telefono>636193169</telefono>
-      <id_usuario>40</id_usuario>
-    </cliente>
-    <cliente id="39">
-      <direccion>Calle Falsa 39, Ciudad</direccion>
-      <telefono>662410085</telefono>
-      <id_usuario>41</id_usuario>
-    </cliente>
-    <cliente id="40">
-      <direccion>Calle Falsa 40, Ciudad</direccion>
-      <telefono>677774327</telefono>
-      <id_usuario>42</id_usuario>
-    </cliente>
-    <cliente id="41">
-      <direccion>Calle Falsa 41, Ciudad</direccion>
-      <telefono>639996370</telefono>
-      <id_usuario>43</id_usuario>
-    </cliente>
-    <cliente id="42">
-      <direccion>Calle Falsa 42, Ciudad</direccion>
-      <telefono>640830984</telefono>
-      <id_usuario>44</id_usuario>
-    </cliente>
-    <cliente id="43">
-      <direccion>Calle Falsa 43, Ciudad</direccion>
-      <telefono>659147477</telefono>
-      <id_usuario>45</id_usuario>
-    </cliente>
-    <cliente id="44">
-      <direccion>Calle Falsa 44, Ciudad</direccion>
-      <telefono>622472266</telefono>
-      <id_usuario>46</id_usuario>
-    </cliente>
-    <cliente id="45">
-      <direccion>Calle Falsa 45, Ciudad</direccion>
-      <telefono>689993332</telefono>
-      <id_usuario>47</id_usuario>
-    </cliente>
-    <cliente id="46">
-      <direccion>Calle Falsa 46, Ciudad</direccion>
-      <telefono>649458968</telefono>
-      <id_usuario>48</id_usuario>
-    </cliente>
-    <cliente id="47">
-      <direccion>Calle Falsa 47, Ciudad</direccion>
-      <telefono>669478766</telefono>
-      <id_usuario>49</id_usuario>
-    </cliente>
-    <cliente id="48">
-      <direccion>Calle Falsa 48, Ciudad</direccion>
-      <telefono>640996326</telefono>
-      <id_usuario>50</id_usuario>
-    </cliente>
-    <cliente id="49">
-      <direccion>Calle Falsa 49, Ciudad</direccion>
-      <telefono>691625293</telefono>
-      <id_usuario>51</id_usuario>
-    </cliente>
-    <cliente id="50">
-      <direccion>Calle Falsa 50, Ciudad</direccion>
-      <telefono>673631315</telefono>
-      <id_usuario>52</id_usuario>
-    </cliente>
-    <cliente id="51">
-      <direccion>Calle Falsa 51, Ciudad</direccion>
-      <telefono>674003452</telefono>
-      <id_usuario>53</id_usuario>
-    </cliente>
-    <cliente id="52">
-      <direccion>Calle Falsa 52, Ciudad</direccion>
-      <telefono>680169378</telefono>
-      <id_usuario>54</id_usuario>
-    </cliente>
-    <cliente id="53">
-      <direccion>Calle Falsa 53, Ciudad</direccion>
-      <telefono>673453423</telefono>
-      <id_usuario>55</id_usuario>
-    </cliente>
-    <cliente id="54">
-      <direccion>Calle Falsa 54, Ciudad</direccion>
-      <telefono>687106627</telefono>
-      <id_usuario>56</id_usuario>
-    </cliente>
-    <cliente id="55">
-      <direccion>Calle Falsa 55, Ciudad</direccion>
-      <telefono>612969016</telefono>
-      <id_usuario>57</id_usuario>
-    </cliente>
-    <cliente id="56">
-      <direccion>Calle Falsa 56, Ciudad</direccion>
-      <telefono>672795161</telefono>
-      <id_usuario>58</id_usuario>
-    </cliente>
-    <cliente id="57">
-      <direccion>Calle Falsa 57, Ciudad</direccion>
-      <telefono>602166544</telefono>
-      <id_usuario>59</id_usuario>
-    </cliente>
-    <cliente id="58">
-      <direccion>Calle Falsa 58, Ciudad</direccion>
-      <telefono>601214541</telefono>
-      <id_usuario>60</id_usuario>
+      <direccion>Sin definir</direccion>
+      <telefono>000000000</telefono>
+      <id_usuario>1</id_usuario>
     </cliente>
   </clientes>
   <pedidos>
-    <pedido id="2">
-      <fecha>2023-02-21</fecha>
-      <id_cliente>2</id_cliente>
+    <pedido id="1">
+      <fecha>2025-05-23</fecha>
+      <id_cliente>1</id_cliente>
       <lineas>
-        <linea cantidad="3" precio_unitario="54.81" producto="Producto6"/>
-        <linea cantidad="3" precio_unitario="14.61" producto="Producto15"/>
-      </lineas>
-    </pedido>
-    <pedido id="3">
-      <fecha>2023-07-21</fecha>
-      <id_cliente>3</id_cliente>
-      <lineas>
-        <linea cantidad="3" precio_unitario="45.46" producto="Producto13"/>
-      </lineas>
-    </pedido>
-    <pedido id="4">
-      <fecha>2023-07-29</fecha>
-      <id_cliente>4</id_cliente>
-      <lineas>
-        <linea cantidad="3" precio_unitario="40.03" producto="Producto1"/>
-        <linea cantidad="3" precio_unitario="98.12" producto="Producto9"/>
-        <linea cantidad="2" precio_unitario="45.46" producto="Producto13"/>
-      </lineas>
-    </pedido>
-    <pedido id="5">
-      <fecha>2023-08-20</fecha>
-      <id_cliente>5</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="92.66" producto="Producto8"/>
-      </lineas>
-    </pedido>
-    <pedido id="6">
-      <fecha>2023-04-20</fecha>
-      <id_cliente>6</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="70.61" producto="Producto3"/>
-      </lineas>
-    </pedido>
-    <pedido id="7">
-      <fecha>2024-03-13</fecha>
-      <id_cliente>7</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="92.66" producto="Producto8"/>
-        <linea cantidad="1" precio_unitario="61.88" producto="Producto11"/>
-        <linea cantidad="3" precio_unitario="45.46" producto="Producto13"/>
-      </lineas>
-    </pedido>
-    <pedido id="8">
-      <fecha>2023-05-03</fecha>
-      <id_cliente>8</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="40.03" producto="Producto1"/>
-        <linea cantidad="2" precio_unitario="61.88" producto="Producto11"/>
-        <linea cantidad="1" precio_unitario="45.46" producto="Producto13"/>
-      </lineas>
-    </pedido>
-    <pedido id="9">
-      <fecha>2023-02-21</fecha>
-      <id_cliente>9</id_cliente>
-      <lineas>
-        <linea cantidad="3" precio_unitario="54.81" producto="Producto6"/>
-        <linea cantidad="1" precio_unitario="92.66" producto="Producto8"/>
-        <linea cantidad="3" precio_unitario="98.12" producto="Producto9"/>
-      </lineas>
-    </pedido>
-    <pedido id="10">
-      <fecha>2024-01-20</fecha>
-      <id_cliente>10</id_cliente>
-      <lineas>
-        <linea cantidad="3" precio_unitario="73.68" producto="Producto5"/>
-        <linea cantidad="1" precio_unitario="92.66" producto="Producto8"/>
-        <linea cantidad="2" precio_unitario="42.89" producto="Producto12"/>
-      </lineas>
-    </pedido>
-    <pedido id="11">
-      <fecha>2023-10-12</fecha>
-      <id_cliente>11</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="45.46" producto="Producto13"/>
-      </lineas>
-    </pedido>
-    <pedido id="12">
-      <fecha>2024-02-18</fecha>
-      <id_cliente>12</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="40.03" producto="Producto1"/>
-      </lineas>
-    </pedido>
-    <pedido id="13">
-      <fecha>2023-12-01</fecha>
-      <id_cliente>13</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="83.03" producto="Producto7"/>
-      </lineas>
-    </pedido>
-    <pedido id="14">
-      <fecha>2023-06-25</fecha>
-      <id_cliente>14</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="70.61" producto="Producto3"/>
-        <linea cantidad="1" precio_unitario="61.88" producto="Producto11"/>
-        <linea cantidad="1" precio_unitario="14.61" producto="Producto15"/>
-      </lineas>
-    </pedido>
-    <pedido id="15">
-      <fecha>2023-12-01</fecha>
-      <id_cliente>15</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="59.56" producto="Producto4"/>
-        <linea cantidad="3" precio_unitario="61.88" producto="Producto11"/>
-      </lineas>
-    </pedido>
-    <pedido id="16">
-      <fecha>2024-03-31</fecha>
-      <id_cliente>16</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="83.03" producto="Producto7"/>
-      </lineas>
-    </pedido>
-    <pedido id="18">
-      <fecha>2023-08-15</fecha>
-      <id_cliente>18</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="45.46" producto="Producto13"/>
-      </lineas>
-    </pedido>
-    <pedido id="19">
-      <fecha>2023-01-24</fecha>
-      <id_cliente>19</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="73.68" producto="Producto5"/>
-        <linea cantidad="2" precio_unitario="54.81" producto="Producto6"/>
-        <linea cantidad="1" precio_unitario="83.03" producto="Producto7"/>
-      </lineas>
-    </pedido>
-    <pedido id="20">
-      <fecha>2024-04-07</fecha>
-      <id_cliente>20</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="73.68" producto="Producto5"/>
-        <linea cantidad="1" precio_unitario="83.03" producto="Producto7"/>
-        <linea cantidad="1" precio_unitario="98.12" producto="Producto9"/>
-      </lineas>
-    </pedido>
-    <pedido id="21">
-      <fecha>2023-01-29</fecha>
-      <id_cliente>21</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="14.61" producto="Producto15"/>
-      </lineas>
-    </pedido>
-    <pedido id="22">
-      <fecha>2023-06-28</fecha>
-      <id_cliente>22</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="21.52" producto="Producto2"/>
-        <linea cantidad="1" precio_unitario="70.61" producto="Producto3"/>
-        <linea cantidad="1" precio_unitario="73.68" producto="Producto5"/>
-      </lineas>
-    </pedido>
-    <pedido id="23">
-      <fecha>2024-02-20</fecha>
-      <id_cliente>23</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="92.66" producto="Producto8"/>
-        <linea cantidad="2" precio_unitario="45.46" producto="Producto13"/>
-      </lineas>
-    </pedido>
-    <pedido id="24">
-      <fecha>2024-03-10</fecha>
-      <id_cliente>24</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="70.61" producto="Producto3"/>
-        <linea cantidad="2" precio_unitario="92.66" producto="Producto8"/>
-        <linea cantidad="3" precio_unitario="75.14" producto="Producto10"/>
-      </lineas>
-    </pedido>
-    <pedido id="25">
-      <fecha>2023-05-22</fecha>
-      <id_cliente>25</id_cliente>
-      <lineas>
-        <linea cantidad="3" precio_unitario="21.52" producto="Producto2"/>
-        <linea cantidad="3" precio_unitario="70.61" producto="Producto3"/>
-      </lineas>
-    </pedido>
-    <pedido id="26">
-      <fecha>2024-04-19</fecha>
-      <id_cliente>26</id_cliente>
-      <lineas>
-        <linea cantidad="3" precio_unitario="70.61" producto="Producto3"/>
-        <linea cantidad="2" precio_unitario="92.66" producto="Producto8"/>
-      </lineas>
-    </pedido>
-    <pedido id="27">
-      <fecha>2023-10-24</fecha>
-      <id_cliente>27</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="21.52" producto="Producto2"/>
-        <linea cantidad="1" precio_unitario="45.46" producto="Producto13"/>
-      </lineas>
-    </pedido>
-    <pedido id="28">
-      <fecha>2023-04-23</fecha>
-      <id_cliente>28</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="45.46" producto="Producto13"/>
-      </lineas>
-    </pedido>
-    <pedido id="29">
-      <fecha>2023-05-21</fecha>
-      <id_cliente>29</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="54.81" producto="Producto6"/>
-      </lineas>
-    </pedido>
-    <pedido id="30">
-      <fecha>2023-06-16</fecha>
-      <id_cliente>30</id_cliente>
-      <lineas>
-        <linea cantidad="3" precio_unitario="59.56" producto="Producto4"/>
-        <linea cantidad="3" precio_unitario="42.89" producto="Producto12"/>
-      </lineas>
-    </pedido>
-    <pedido id="31">
-      <fecha>2024-03-23</fecha>
-      <id_cliente>31</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="83.03" producto="Producto7"/>
-        <linea cantidad="1" precio_unitario="98.12" producto="Producto9"/>
-      </lineas>
-    </pedido>
-    <pedido id="32">
-      <fecha>2023-03-16</fecha>
-      <id_cliente>32</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="92.66" producto="Producto8"/>
-        <linea cantidad="3" precio_unitario="88.75" producto="Producto14"/>
-      </lineas>
-    </pedido>
-    <pedido id="33">
-      <fecha>2024-01-29</fecha>
-      <id_cliente>33</id_cliente>
-      <lineas>
-        <linea cantidad="3" precio_unitario="70.61" producto="Producto3"/>
-        <linea cantidad="3" precio_unitario="42.89" producto="Producto12"/>
-      </lineas>
-    </pedido>
-    <pedido id="34">
-      <fecha>2023-06-15</fecha>
-      <id_cliente>34</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="21.52" producto="Producto2"/>
-        <linea cantidad="3" precio_unitario="54.81" producto="Producto6"/>
-        <linea cantidad="2" precio_unitario="61.88" producto="Producto11"/>
-      </lineas>
-    </pedido>
-    <pedido id="35">
-      <fecha>2023-04-14</fecha>
-      <id_cliente>35</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="75.14" producto="Producto10"/>
-      </lineas>
-    </pedido>
-    <pedido id="36">
-      <fecha>2024-04-05</fecha>
-      <id_cliente>36</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="54.81" producto="Producto6"/>
-      </lineas>
-    </pedido>
-    <pedido id="37">
-      <fecha>2023-02-21</fecha>
-      <id_cliente>37</id_cliente>
-      <lineas>
-        <linea cantidad="3" precio_unitario="98.12" producto="Producto9"/>
-      </lineas>
-    </pedido>
-    <pedido id="38">
-      <fecha>2023-06-09</fecha>
-      <id_cliente>38</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="21.52" producto="Producto2"/>
-        <linea cantidad="2" precio_unitario="98.12" producto="Producto9"/>
-      </lineas>
-    </pedido>
-    <pedido id="39">
-      <fecha>2023-01-17</fecha>
-      <id_cliente>39</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="73.68" producto="Producto5"/>
-      </lineas>
-    </pedido>
-    <pedido id="40">
-      <fecha>2024-01-29</fecha>
-      <id_cliente>40</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="70.61" producto="Producto3"/>
-        <linea cantidad="1" precio_unitario="73.68" producto="Producto5"/>
-        <linea cantidad="1" precio_unitario="42.89" producto="Producto12"/>
-      </lineas>
-    </pedido>
-    <pedido id="41">
-      <fecha>2023-08-04</fecha>
-      <id_cliente>41</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="59.56" producto="Producto4"/>
-      </lineas>
-    </pedido>
-    <pedido id="42">
-      <fecha>2024-03-13</fecha>
-      <id_cliente>42</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="21.52" producto="Producto2"/>
-        <linea cantidad="3" precio_unitario="59.56" producto="Producto4"/>
-        <linea cantidad="2" precio_unitario="42.89" producto="Producto12"/>
-      </lineas>
-    </pedido>
-    <pedido id="43">
-      <fecha>2023-11-08</fecha>
-      <id_cliente>43</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="70.61" producto="Producto3"/>
-      </lineas>
-    </pedido>
-    <pedido id="44">
-      <fecha>2023-11-10</fecha>
-      <id_cliente>44</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="83.03" producto="Producto7"/>
-        <linea cantidad="2" precio_unitario="45.46" producto="Producto13"/>
-      </lineas>
-    </pedido>
-    <pedido id="45">
-      <fecha>2023-01-17</fecha>
-      <id_cliente>45</id_cliente>
-      <lineas>
-        <linea cantidad="3" precio_unitario="21.52" producto="Producto2"/>
-        <linea cantidad="3" precio_unitario="92.66" producto="Producto8"/>
-      </lineas>
-    </pedido>
-    <pedido id="46">
-      <fecha>2023-04-30</fecha>
-      <id_cliente>46</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="59.56" producto="Producto4"/>
-      </lineas>
-    </pedido>
-    <pedido id="47">
-      <fecha>2023-04-02</fecha>
-      <id_cliente>47</id_cliente>
-      <lineas>
-        <linea cantidad="3" precio_unitario="45.46" producto="Producto13"/>
-      </lineas>
-    </pedido>
-    <pedido id="48">
-      <fecha>2023-12-28</fecha>
-      <id_cliente>48</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="73.68" producto="Producto5"/>
-        <linea cantidad="1" precio_unitario="42.89" producto="Producto12"/>
-        <linea cantidad="3" precio_unitario="45.46" producto="Producto13"/>
-      </lineas>
-    </pedido>
-    <pedido id="49">
-      <fecha>2023-09-24</fecha>
-      <id_cliente>49</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="92.66" producto="Producto8"/>
-      </lineas>
-    </pedido>
-    <pedido id="50">
-      <fecha>2024-01-07</fecha>
-      <id_cliente>50</id_cliente>
-      <lineas>
-        <linea cantidad="3" precio_unitario="98.12" producto="Producto9"/>
-        <linea cantidad="3" precio_unitario="88.75" producto="Producto14"/>
-      </lineas>
-    </pedido>
-    <pedido id="51">
-      <fecha>2023-11-18</fecha>
-      <id_cliente>51</id_cliente>
-      <lineas>
-        <linea cantidad="3" precio_unitario="40.03" producto="Producto1"/>
-        <linea cantidad="1" precio_unitario="92.66" producto="Producto8"/>
-        <linea cantidad="2" precio_unitario="88.75" producto="Producto14"/>
-      </lineas>
-    </pedido>
-    <pedido id="52">
-      <fecha>2023-01-03</fecha>
-      <id_cliente>52</id_cliente>
-      <lineas>
-        <linea cantidad="3" precio_unitario="54.81" producto="Producto6"/>
-      </lineas>
-    </pedido>
-    <pedido id="53">
-      <fecha>2023-06-10</fecha>
-      <id_cliente>53</id_cliente>
-      <lineas>
-        <linea cantidad="2" precio_unitario="83.03" producto="Producto7"/>
-      </lineas>
-    </pedido>
-    <pedido id="54">
-      <fecha>2023-07-10</fecha>
-      <id_cliente>54</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="42.89" producto="Producto12"/>
-        <linea cantidad="1" precio_unitario="45.46" producto="Producto13"/>
-      </lineas>
-    </pedido>
-    <pedido id="55">
-      <fecha>2023-08-29</fecha>
-      <id_cliente>55</id_cliente>
-      <lineas>
-        <linea cantidad="3" precio_unitario="70.61" producto="Producto3"/>
-        <linea cantidad="1" precio_unitario="14.61" producto="Producto15"/>
-      </lineas>
-    </pedido>
-    <pedido id="56">
-      <fecha>2023-07-01</fecha>
-      <id_cliente>56</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="70.61" producto="Producto3"/>
-        <linea cantidad="3" precio_unitario="73.68" producto="Producto5"/>
-        <linea cantidad="3" precio_unitario="54.81" producto="Producto6"/>
-      </lineas>
-    </pedido>
-    <pedido id="57">
-      <fecha>2023-01-19</fecha>
-      <id_cliente>57</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="54.81" producto="Producto6"/>
-        <linea cantidad="2" precio_unitario="98.12" producto="Producto9"/>
-        <linea cantidad="3" precio_unitario="75.14" producto="Producto10"/>
-      </lineas>
-    </pedido>
-    <pedido id="58">
-      <fecha>2023-11-19</fecha>
-      <id_cliente>58</id_cliente>
-      <lineas>
-        <linea cantidad="1" precio_unitario="59.56" producto="Producto4"/>
-        <linea cantidad="1" precio_unitario="83.03" producto="Producto7"/>
-        <linea cantidad="1" precio_unitario="88.75" producto="Producto14"/>
-      </lineas>
-    </pedido>
-    <pedido id="59">
-      <fecha>2025-05-21</fecha>
-      <id_cliente>12</id_cliente>
-      <lineas>
-        <linea cantidad="3" precio_unitario="40.03" producto="Producto1"/>
-        <linea cantidad="3" precio_unitario="92.66" producto="Producto8"/>
+        <linea cantidad="1" precio_unitario="49.99" producto="Camiseta Logo"/>
+        <linea cantidad="1" precio_unitario="49.99" producto="Camiseta Logo"/>
       </lineas>
     </pedido>
   </pedidos>

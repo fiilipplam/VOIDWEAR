@@ -25,6 +25,23 @@ public class ClienteDAO {
 		}
 		return null;
 	}
+	
+	public static void insertar(Cliente cliente) {
+	    String sql = "INSERT INTO cliente (direccion, telefono, id_usuario) VALUES (?, ?, ?)";
+
+	    try (Connection con = ConexionBD.getConexion();
+	         PreparedStatement ps = con.prepareStatement(sql)) {
+
+	        ps.setString(1, cliente.getDireccion());
+	        ps.setString(2, cliente.getTelefono());
+	        ps.setInt(3, cliente.getIdUsuario());
+	        ps.executeUpdate();
+
+	    } catch (SQLException e) {
+	        System.err.println("Error al insertar cliente en SQL: " + e.getMessage());
+	    }
+	}
+
 
 	public static String obtenerNombreSQL(int idUsuario) {
 		String sql = "SELECT nombre FROM usuario WHERE id_usuario = ?";
@@ -40,20 +57,28 @@ public class ClienteDAO {
 		return "Desconocido";
 	}
 
-	public static Cliente obtenerPorUsuario(String correoUsuario) {
-		String sql = "SELECT c.* FROM cliente c JOIN usuario u ON c.id_usuario = u.id_usuario WHERE u.correo = ?";
-		try (Connection con = ConexionBD.getConexion(); PreparedStatement ps = con.prepareStatement(sql)) {
-			ps.setString(1, correoUsuario);
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				return new Cliente(rs.getInt("id_cliente"), rs.getString("direccion"), rs.getString("telefono"),
-						rs.getInt("id_usuario"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
+	public static Cliente obtenerPorUsuario(String correo) {
+	    Cliente cliente = null;
+	    String sql = "SELECT c.* FROM cliente c JOIN usuario u ON c.id_usuario = u.id_usuario WHERE u.correo = ?";
+	    try (Connection con = ConexionBD.getConexion();
+	         PreparedStatement ps = con.prepareStatement(sql)) {
+
+	        ps.setString(1, correo);
+	        ResultSet rs = ps.executeQuery();
+	        if (rs.next()) {
+	            cliente = new Cliente(
+	                rs.getInt("id_cliente"),
+	                rs.getString("direccion"),
+	                rs.getString("telefono"),
+	                rs.getInt("id_usuario")
+	            );
+	        }
+	    } catch (SQLException e) {
+	        System.err.println("Error al obtener cliente por correo: " + e.getMessage());
+	    }
+	    return cliente;
 	}
+
 
 	public static int obtenerIdPorUsuario(String correoUsuario) {
 		Cliente c = obtenerPorUsuario(correoUsuario);
